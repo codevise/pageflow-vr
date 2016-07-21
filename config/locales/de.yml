@@ -1,0 +1,15 @@
+de:
+  pageflow:
+    vr:
+      help_entries:
+        page_type:
+          menu_item: Virtual Reality
+          text: ! '# Virtual Reality'
+      page_attributes:
+        timeline_layout:
+          inline_help: Wähle hier die Ausrichtung der Verweis-Bilder für die gesamte Seite.
+          label: Layout
+      page_type_category_name: Interaktiv
+      page_type_description: Interaktive 360° Videos
+      page_type_feature_name: Virtual Reality Seitentyp
+      page_type_name: Virtual Reality

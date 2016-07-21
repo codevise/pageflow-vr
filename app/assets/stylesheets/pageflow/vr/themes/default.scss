@@ -1,0 +1,19 @@
+@include pageflow-page-type("vr");
+@include pageflow-page-type-pictograms("vr");
+
+.pageflow_vr-vr_view {
+  @extend %pageflow_widget_margin_right !optional;
+
+  pointer-events: all;
+  position: relative;
+  height: 100%;
+  width: auto;
+}
+
+.pageflow_vr-vr_view-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;;
+}
