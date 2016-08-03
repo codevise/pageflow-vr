@@ -6,10 +6,28 @@ de:
           menu_item: Virtual Reality
           text: ! '# Virtual Reality'
       page_attributes:
-        timeline_layout:
-          inline_help: Wähle hier die Ausrichtung der Verweis-Bilder für die gesamte Seite.
-          label: Layout
+        video_id:
+          inline_help: Video in dem der Benutzer sich umsehen kann.
+          label: 360°-Video
+        is_stereo:
+          inline_help: Gibt an, ob das Video im "Stacked Stereo" Format ist.
+          label: Stereo
+        start_yaw:
+          inline_help: Bestimmt den initialen Blickwinkel im Video.
+          label: Start-Winkel
+        fallback_type:
+          inline_help: Legt fest was angezeigt wird, wenn der Browser keine 360°-Videos unterstützt.
+          label: Fallback Typ
+          values:
+            youtube: YouTube 360°-Video
+            image: Hintergrundbild
+        fallback_image_id:
+          label: Fallback Bild
+          inline_help: Bild, das angezeigt wird, wenn der Browser keine 360°-Videos unterstützt.
+        fallback_youtube_url:
+          label: Fallback YouTube URL
+          inline_help: YouTube Video, das verlinkt wird, wenn der Browser keine 360°-Videos unterstützt.
       page_type_category_name: Interaktiv
       page_type_description: Interaktive 360° Videos
-      page_type_feature_name: Virtual Reality Seitentyp
-      page_type_name: Virtual Reality
+      page_type_feature_name: 360° Video Seitentyp
+      page_type_name: 360° Video

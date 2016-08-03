@@ -1,4 +1,6 @@
 (function() {
+  const resolve = pageflow.react.resolve;
+
   function VrView(props) {
     return (
       <div className="pageflow_vr-vr_view">
@@ -12,8 +14,20 @@
   }
 
   function source(props) {
-    return '//storage.googleapis.com/vrview/index.html?video=//storage.googleapis.com/vrview/examples/video/congo_2048.mp4&is_stereo=true&image=examples/video/congo_2048.jpg';
+    return url({
+      video: props.videoUrl || '//storage.googleapis.com/vrview/examples/video/congo_2048.mp4',
+      is_stereo: props.isStereo ? 'true' : 'false',
+      start_yaw: props.startYaw
+    });
   }
 
-  pageflow.vr.VrView = pageflow.react.createPage(VrView);
+  function url(params) {
+    const paramsString = Object.keys(params).map((key) =>
+      `${key}=${params[key]}`
+    ).join('&');
+
+    return `//storage.googleapis.com/vrview/index.html?${paramsString}`;
+  }
+
+  pageflow.vr.VrView = VrView;
 }());
