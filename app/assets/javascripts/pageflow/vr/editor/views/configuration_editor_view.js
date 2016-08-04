@@ -3,6 +3,9 @@ pageflow.vr.ConfigurationEditorView = pageflow.ConfigurationEditorView.extend({
     this.tab('general', function() {
       this.group('general');
 
+      this.input('additional_title', pageflow.TextInputView);
+      this.input('additional_description', pageflow.TextAreaInputView, {size: 'short'});
+
       this.input('control_bar_text', pageflow.TextInputView, {
         placeholder: I18n.t('pageflow.public.vr.start', {
           locale: pageflow.entry.configuration.get('locale')
