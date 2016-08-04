@@ -10,7 +10,9 @@
   function Page(props) {
     return (
       <PageWithInteractiveBackground page={props.page}>
-        <VrView startYaw={props.page.startYaw} isStereo={props.page.isStereo} />
+        <VrView videoId={props.page.videoId}
+                startYaw={props.page.startYaw}
+                isStereo={props.page.isStereo} />
         <NoVrView>
           <PageBackgroundImage page={props.page} />
         </NoVrView>

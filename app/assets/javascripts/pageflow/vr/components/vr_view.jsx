@@ -26,8 +26,15 @@
       `${key}=${params[key]}`
     ).join('&');
 
-    return `//storage.googleapis.com/vrview/index.html?${paramsString}`;
+    return `/vrview/index.html?${paramsString}`;
   }
 
-  pageflow.vr.VrView = VrView;
+  pageflow.vr.VrView = pageflow.react.createContainer(VrView, {
+    fragments: {
+      videoUrl: resolve('videoFileUrl', {
+        id: props => props.videoId,
+        quality: 'fullhd'
+      })
+    }
+  });
 }());
