@@ -39,7 +39,7 @@
     }
 
     renderIframeIfPrepared() {
-      if (this.props.prepared) {
+      if (this.props.prepared && this.props.videoFile) {
         return this.renderIframe();
       }
     }

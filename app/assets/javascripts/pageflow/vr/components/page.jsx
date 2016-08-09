@@ -129,7 +129,7 @@
     }
 
     availableQualitiesInDescendingOrder() {
-      return ['4k', 'fullhd', 'high'].filter(quality => !!this.props.videoFile[quality]);
+      return ['4k', 'fullhd', 'high'].filter(quality => this.props.videoFile && this.props.videoFile[quality]);
     }
   }
 
