@@ -10,6 +10,26 @@
       };
     }
 
+    componentWillReceiveProps(nextProps) {
+      if (!this.props.isPlaying && nextProps.isPlaying) {
+        this.player.play();
+      }
+      else if (this.props.isPlaying && !nextProps.isPlaying) {
+        this.player.fadeOutAndPause(200);
+      }
+
+      if (!this.props.isCardboardModeRequested && nextProps.isCardboardModeRequested) {
+        this.player.enterVRMode();
+
+        // Trigger reset of prop right away. This should listen for events emitted by the iframe instead.
+        if (nextProps.onExitCardboardMode) {
+          setTimeout(() => {
+            nextProps.onExitCardboardMode();
+          }, 100);
+        }
+      }
+    }
+
     render() {
       return (
         <div className="pageflow_vr-vr_view">

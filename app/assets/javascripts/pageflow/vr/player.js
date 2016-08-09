@@ -29,6 +29,10 @@ pageflow.vr.Player = pageflow.Object.extend({
     }
   },
 
+  enterVRMode: function() {
+    this.sendCommand('enterVRMode');
+  },
+
   sendCommand: function(name, value) {
     this.iframe.contentWindow.postMessage({
       type: 'PlayerCommand',
