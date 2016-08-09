@@ -22,23 +22,30 @@ pageflow.vr.ConfigurationEditorView = pageflow.ConfigurationEditorView.extend({
         unit: '°',
         maxValue: 360
       });
-      this.input('fallback_type', pageflow.SelectInputView, {
-        values: ['youtube', 'image'],
-        ensureValueDefined: true
-      });
-      this.input('fallback_youtube_url', pageflow.UrlInputView, {
-        permitHttps: true,
-        visibleBinding: 'fallback_type',
-        visibleBindingValue: 'youtube'
-      });
-      this.input('fallback_image_id', pageflow.FileInputView, {
-        collection: 'image_files',
-        visibleBinding: 'fallback_type',
-        visibleBindingValue: 'image'
-      });
       this.input('thumbnail_image_id', pageflow.FileInputView, {
         collection: 'image_files',
         positioning: false
+      });
+    });
+
+    this.tab('vr_fallback', function() {
+      this.input('preview_vr_fallback', pageflow.CheckBoxInputView);
+      this.input('fallback_image_id', pageflow.FileInputView, {
+        collection: 'image_files'
+      });
+      this.input('fallback_text', pageflow.TextAreaInputView, {
+        size: 'short'
+      });
+      this.input('fallback_you_tube_url', pageflow.UrlInputView, {
+        permitHttps: true,
+        displayPropertyName: 'display_fallback_you_tube_url',
+        supportedHosts: [
+          'http://youtube.com',
+          'https://youtube.com'
+        ]
+      });
+      this.view(pageflow.vr.FallbackPreviewModeView, {
+        model: this.model
       });
     });
 

@@ -1,11 +1,13 @@
 @include pageflow-page-type("vr");
 @include pageflow-page-type-pictograms("vr");
 
+$vr-no-vr-background-color: rgba(17, 17, 17, 0.9) !default;
+
 .pageflow_vr-vr_view {
   pointer-events: all;
-  position: relative;
+  position: absolute;
   height: 100%;
-  width: auto;
+  width: 100%;
 }
 
 .pageflow_vr-vr_view-frame {
@@ -14,4 +16,17 @@
   left: 0;
   height: 100%;
   width: 100%;;
+}
+
+.pageflow_vr-no_vr_view {
+  margin: 5em auto 0 auto;
+  padding: 20px;
+  background-color: $vr-no-vr-background-color;
+  max-width: 500px;
+
+  a {
+    @extend %anchor;
+    color: $main-color;
+    pointer-events: all;
+  }
 }

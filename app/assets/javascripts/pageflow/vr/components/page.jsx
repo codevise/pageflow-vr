@@ -2,7 +2,8 @@
   const {resolve, mutate} = pageflow.react;
 
   const {
-    PageWithInteractiveBackground, PageBackgroundImage
+    PageWithInteractiveBackground, PageBackgroundImage,
+    PageWrapper, PageBackground, PageShadow, PageContent, PageHeader, PageText
   } = pageflow.react.components;
 
   const {
@@ -35,11 +36,21 @@
     }
 
     render() {
+      if (!pageflow.browser || !pageflow.browser.has('vr view support') ||
+          (PAGEFLOW_EDITOR && this.props.page.previewVrFallback)) {
+        return this.renderFallbackPage();
+      }
+      else {
+        return this.renderVrViewPage();
+      }
+    }
+
+    renderVrViewPage() {
       const props = this.props;
 
       return (
         <PageWithInteractiveBackground page={props.page}
-                                       qualityMenuButtonTitle={props.i18n.t('pageflow.vr.select_quality')}
+                                       qualityMenuButtonTitle={props.i18n.t('pageflow.public.vr.select_quality')}
                                        qualityMenuItems={this.qualityMenuItems()}
                                        additionalMenuBarButtons={this.additionalMenuBarButtons()}
                                        onAdditionalButtonClick={this.onCardboardButtonClick}
@@ -54,11 +65,28 @@
                   isPlaying={this.state.isVrViewPlaying}
                   isCardboardModeRequested={this.state.isCardboardModeRequested}
                   onExitCardboardMode={this.onExitCardboardMode} />
-
-          <NoVrView>
-            <PageBackgroundImage page={props.page} />
-          </NoVrView>
         </PageWithInteractiveBackground>
+      );
+    }
+
+    renderFallbackPage() {
+      const props = this.props;
+
+      return (
+        <PageWrapper>
+          <PageBackground>
+            <PageBackgroundImage page={props.page} imagePropertyBaseName="fallbackImage" />
+            <PageShadow page={props.page} />
+          </PageBackground>
+
+          <PageContent>
+            <PageHeader page={props.page} />
+            <PageText page={props.page} />
+
+            <NoVrView text={props.page.fallbackText}
+                      youTubeUrl={props.page.fallbackYouTubeUrl} />
+          </PageContent>
+        </PageWrapper>
       );
     }
 
@@ -69,21 +97,26 @@
       return this.availableQualitiesInDescendingOrder().map(value => {
         return {
           value,
-          label: i18n.t(`pageflow.vr.video_qualities.${value}`),
-          annotation: i18n.t(`pageflow.vr.video_quality_annotations.${value}`),
+          label: i18n.t(`pageflow.public.vr.video_qualities.${value}`),
+          annotation: i18n.t(`pageflow.public.vr.video_quality_annotations.${value}`),
           active: activeQuality == value,
         };
       });
     }
 
     additionalMenuBarButtons() {
-      return [
-        {
-          name: 'cardboard',
-          label: this.props.i18n.t('pageflow.vr.start_cardboard'),
-          iconName: 'pageflow-vr.cardboard'
-        }
-      ];
+      if (!pageflow.browser || !pageflow.browser.has('vr view cardboard support')) {
+        return [];
+      }
+      else {
+        return [
+          {
+            name: 'cardboard',
+            label: this.props.i18n.t('pageflow.public.vr.start_cardboard'),
+            iconName: 'pageflow-vr.cardboard'
+          }
+        ];
+      }
     }
 
     activeQuality() {

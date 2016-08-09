@@ -15,31 +15,42 @@ de:
         start_yaw:
           inline_help: Bestimmt den initialen Blickwinkel im Video.
           label: Start-Winkel
-        fallback_type:
-          inline_help: Legt fest was angezeigt wird, wenn der Browser keine 360°-Videos unterstützt.
-          label: Fallback Typ
-          values:
-            youtube: YouTube 360°-Video
-            image: Hintergrundbild
+        preview_vr_fallback:
+          label: "Fallback Vorschau ansehen"
+          inline_help: Aktivieren Sie diese Option, um die Seite so zu sehen, wie sie angezeigt wird, wenn der Browser keine 360°-Videos unterstützt.
         fallback_image_id:
           label: Fallback Bild
           inline_help: Bild, das angezeigt wird, wenn der Browser keine 360°-Videos unterstützt.
-        fallback_youtube_url:
+        fallback_text:
+          label: Fallback Erklärtext
+          inline_help: Text, der angezeigt wird, um zu erklären, dass der Browser keine 360°-Videos unterstützt. Leer lassen, um Standard-Text zu verwenden.
+        fallback_you_tube_url:
           label: Fallback YouTube URL
           inline_help: YouTube Video, das verlinkt wird, wenn der Browser keine 360°-Videos unterstützt.
-      video_qualities:
-        high: "720p"
-        fullhd: "1980p"
-        4k: "2160p"
-      video_quality_annotations:
-        high: "HD"
-        fullhd: "HD"
-        4k: "4K"
 
-      start_cardboard: "Cardboard-Modus starten"
-      select_quality: "Video-Qualität auswählen"
+
+    public:
+      vr:
+        start: "360° Video starten"
+        start_cardboard: "Cardboard-Modus starten"
+        select_quality: "Video-Qualität auswählen"
+        video_qualities:
+          high: "720p"
+          fullhd: "1980p"
+          4k: "2160p"
+        video_quality_annotations:
+          high: "HD"
+          fullhd: "HD"
+          4k: "4K"
+        no_vr:
+          text: "360°-Videos können in ihrem Browser nicht angezeigt werden."
+          link: "Video in der YouTube-App ansehen"
 
       page_type_category_name: Interaktiv
       page_type_description: Interaktive 360° Videos
       page_type_feature_name: 360° Video Seitentyp
       page_type_name: 360° Video
+    ui:
+      configuration_editor:
+        tabs:
+          vr_fallback: Fallback
