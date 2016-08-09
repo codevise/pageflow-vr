@@ -11,6 +11,10 @@
     }
 
     componentWillReceiveProps(nextProps) {
+      if (!this.player) {
+        return;
+      }
+
       if (!this.props.isPlaying && nextProps.isPlaying) {
         this.player.play();
       }
@@ -56,11 +60,15 @@
     }
 
     pageWillActivate() {
-      this.player.playAndFadeIn(1000);
+      if (this.player) {
+        this.player.playAndFadeIn(1000);
+      }
     }
 
     pageWillDeactivate() {
-      this.player.fadeOutAndPause(1000);
+      if (this.player) {
+        this.player.fadeOutAndPause(1000);
+      }
     }
   }
 
