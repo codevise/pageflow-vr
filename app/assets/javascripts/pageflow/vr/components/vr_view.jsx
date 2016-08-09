@@ -13,13 +13,25 @@
     render() {
       return (
         <div className="pageflow_vr-vr_view">
-          <iframe ref={this.bindPlayer}
-                  className="pageflow_vr-vr_view-frame"
-                  allowFullScreen
-                  frameBorder="0"
-                  src={source(this.props)}>
-          </iframe>
+          {this.renderIframeIfPrepared()}
         </div>
+      );
+    }
+
+    renderIframeIfPrepared() {
+      if (this.props.prepared) {
+        return this.renderIframe();
+      }
+    }
+
+    renderIframe() {
+      return (
+        <iframe ref={this.bindPlayer}
+                className="pageflow_vr-vr_view-frame"
+                allowFullScreen
+                frameBorder="0"
+                src={source(this.props)}>
+        </iframe>
       );
     }
 
@@ -34,7 +46,7 @@
 
   function source(props) {
     return url({
-      video: props.videoUrl || '//storage.googleapis.com/vrview/examples/video/congo_2048.mp4',
+      video: props.videoFile[props.quality],
       is_stereo: props.isStereo ? 'true' : 'false',
       start_yaw: props.startYaw,
       no_autoplay: true
@@ -49,13 +61,14 @@
     return `/vrview/index.html?${paramsString}`;
   }
 
+  const {withPageLifecycle, withPreparationProps} = pageflow.react;
+
   pageflow.vr.VrView = pageflow.react.createContainer(
-    pageflow.react.createPageComponent(VrView),
+    withPageLifecycle(withPreparationProps(VrView)),
     {
       fragments: {
-        videoUrl: resolve('videoFileUrl', {
-          id: props => props.videoId,
-          quality: '4k'
+        videoFile: resolve('videoFile', {
+          id: props => props.videoId
         })
       }
     }
