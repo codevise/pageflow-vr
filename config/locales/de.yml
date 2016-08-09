@@ -27,6 +27,10 @@ de:
         fallback_you_tube_url:
           label: Fallback YouTube URL
           inline_help: YouTube Video, das verlinkt wird, wenn der Browser keine 360°-Videos unterstützt.
+      page_type_category_name: Interaktiv
+      page_type_description: Interaktive 360° Videos
+      page_type_feature_name: 360° Video Seitentyp
+      page_type_name: 360° Video
 
 
     public:
@@ -45,11 +49,6 @@ de:
         no_vr:
           text: "360°-Videos können in ihrem Browser nicht angezeigt werden."
           link: "Video in der YouTube-App ansehen"
-
-      page_type_category_name: Interaktiv
-      page_type_description: Interaktive 360° Videos
-      page_type_feature_name: 360° Video Seitentyp
-      page_type_name: 360° Video
     ui:
       configuration_editor:
         tabs:
