@@ -2,8 +2,6 @@
 @include pageflow-page-type-pictograms("vr");
 
 .pageflow_vr-vr_view {
-  @extend %pageflow_widget_margin_right !optional;
-
   pointer-events: all;
   position: relative;
   height: 100%;

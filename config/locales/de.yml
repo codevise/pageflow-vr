@@ -27,6 +27,18 @@ de:
         fallback_youtube_url:
           label: Fallback YouTube URL
           inline_help: YouTube Video, das verlinkt wird, wenn der Browser keine 360°-Videos unterstützt.
+      video_qualities:
+        high: "720p"
+        fullhd: "1980p"
+        4k: "2160p"
+      video_quality_annotations:
+        high: "HD"
+        fullhd: "HD"
+        4k: "4K"
+
+      start_cardboard: "Cardboard-Modus starten"
+      select_quality: "Video-Qualität auswählen"
+
       page_type_category_name: Interaktiv
       page_type_description: Interaktive 360° Videos
       page_type_feature_name: 360° Video Seitentyp
