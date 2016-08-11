@@ -1,6 +1,4 @@
 (function() {
-  const {resolve, mutate} = pageflow.react;
-
   const {
     PageWithInteractiveBackground, PageBackgroundImage,
     PageWrapper, PageBackground, PageShadow, PageContent, PageHeader, PageText
@@ -129,19 +127,23 @@
     }
 
     availableQualitiesInDescendingOrder() {
-      return ['4k', 'fullhd', 'high'].filter(quality => this.props.videoFile && this.props.videoFile[quality]);
+      return ['4k', 'fullhd', 'high'].filter(quality => this.props.page.videoFile && this.props.page.videoFile[quality]);
     }
   }
 
-  const {createPage, createContainer} = pageflow.react;
+  const {resolve, mutate,
+         createPage, createContainer} = pageflow.react;
+
   const qualitySetting = 'vr.videoQuality';
 
   pageflow.vr.Page = createPage(createContainer(Page, {
     fragments: {
       i18n: resolve('i18n'),
-      videoFile: resolve('videoFile', {
-        id: props => props.page.videoId
-      }),
+      page: {
+        videoFile: resolve('videoFile', {
+          property: 'videoId'
+        }),
+      },
       requestedQuality: resolve('setting', {
         property: qualitySetting
       }),

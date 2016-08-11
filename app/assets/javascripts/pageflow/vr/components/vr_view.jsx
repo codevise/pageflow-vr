@@ -43,7 +43,7 @@
     }
 
     renderIframeIfPrepared() {
-      if (this.props.prepared && this.props.videoFile) {
+      if (this.props.pageState.isPrepared && source(this.props)) {
         return this.renderIframe();
       }
     }
@@ -73,6 +73,10 @@
   }
 
   function source(props) {
+    if (!props.videoFile || !props.videoFile[props.quality]) {
+      return null;
+    }
+
     return url({
       video: props.videoFile[props.quality],
       is_stereo: props.isStereo ? 'true' : 'false',
@@ -89,14 +93,14 @@
     return `/vrview/index.html?${paramsString}`;
   }
 
-  const {withPageLifecycle, withPreparationProps} = pageflow.react;
+  const {withPageLifecycle, withPageStateProp} = pageflow.react;
 
   pageflow.vr.VrView = pageflow.react.createContainer(
-    withPageLifecycle(withPreparationProps(VrView)),
+    withPageStateProp(withPageLifecycle(VrView)),
     {
       fragments: {
         videoFile: resolve('videoFile', {
-          id: props => props.videoId
+          property: 'videoId'
         })
       }
     }
