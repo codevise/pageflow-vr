@@ -1,5 +1,5 @@
 //= require_self
-//= require ./components/icons/cardboard
+//= require_tree ./components/icons
 //= require ./components/vr_view
 //= require ./components/no_vr_view
 //= require ./components/page
