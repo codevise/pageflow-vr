@@ -3,6 +3,8 @@
 
 $vr-no-vr-background-color: rgba(17, 17, 17, 0.9) !default;
 
+$vr-no-vr-icon-color: #555 !default;
+
 .pageflow_vr-vr_view {
   pointer-events: all;
   position: absolute;
@@ -23,10 +25,23 @@ $vr-no-vr-background-color: rgba(17, 17, 17, 0.9) !default;
   padding: 20px;
   background-color: $vr-no-vr-background-color;
   max-width: 500px;
+  border-radius: 2px;
 
   a {
     @extend %anchor;
     color: $main-color;
     pointer-events: all;
+  }
+
+  p {
+    width: auto;
+  }
+
+  svg {
+    width: 100px;
+    height: 100px;
+    fill: $vr-no-vr-icon-color;
+    margin: 0 auto 20px auto;
+    display: block;
   }
 }

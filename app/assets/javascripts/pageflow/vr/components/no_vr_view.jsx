@@ -1,7 +1,10 @@
 (function() {
+  const {Icon} = pageflow.react.components;
+
   function NoVrView(props) {
     return (
       <div className="pageflow_vr-no_vr_view">
+        <Icon name="pageflow-vr.play" />
         <p dangerouslySetInnerHTML={text(props)} />
         {renderYouTubeLink(props)}
       </div>
