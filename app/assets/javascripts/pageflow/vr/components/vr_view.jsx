@@ -79,6 +79,7 @@
 
     return url({
       video: props.videoFile[props.quality],
+      preview: props.videoFile.poster,
       is_stereo: props.isStereo ? 'true' : 'false',
       start_yaw: props.startYaw,
       no_autoplay: true
