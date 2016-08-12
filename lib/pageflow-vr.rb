@@ -2,12 +2,25 @@ require 'pageflow/vr/engine'
 
 module Pageflow
   module Vr
+    PAGE_TYPE_THUMBNAIL_CANDIDATES = [
+      {
+        attribute: 'thumbnail_image_id',
+        file_collection: 'image_files'
+      },
+      {
+        attribute: 'video_id',
+        file_collection: 'video_files'
+      }
+    ]
+
     def self.plugin
       Vr::Plugin.new
     end
 
     def self.page_type
-      Pageflow::React.create_page_type('vr', 'pageflow.vr.Page')
+      Pageflow::React.create_page_type('vr',
+                                       'pageflow.vr.Page',
+                                       thumbnail_candidates: PAGE_TYPE_THUMBNAIL_CANDIDATES)
     end
   end
 end
