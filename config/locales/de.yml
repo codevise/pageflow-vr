@@ -15,6 +15,9 @@ de:
         is_stereo:
           inline_help: Gibt an, ob das Video im "Stacked Stereo" Format ist.
           label: Stereo
+        autoplay:
+          inline_help: Video im Hintergrund starten soblad die Seite erreicht wird. Auf mobilen Geräten ist dies aus technischen Gründen nicht möglich. Das Video startet, wenn der Benutzer auf den Play-Button klickt.
+          label: Autoplay
         start_yaw:
           inline_help: Bestimmt den initialen Blickwinkel im Video.
           label: Start-Winkel

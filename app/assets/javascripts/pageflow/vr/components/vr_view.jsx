@@ -60,7 +60,7 @@
     }
 
     pageWillActivate() {
-      if (this.player) {
+      if (this.player && this.props.autoplay) {
         this.player.playAndFadeIn(1000);
       }
     }

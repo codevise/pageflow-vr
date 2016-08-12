@@ -18,6 +18,7 @@ pageflow.vr.ConfigurationEditorView = pageflow.ConfigurationEditorView.extend({
         collection: 'video_files',
         positioning: false
       });
+      this.input('autoplay', pageflow.CheckBoxInputView);
       this.input('is_stereo', pageflow.CheckBoxInputView);
       this.input('start_yaw', pageflow.SliderInputView, {
         unit: '°',

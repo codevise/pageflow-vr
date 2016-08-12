@@ -21,7 +21,9 @@
       };
 
       this.onLeaveBackground = () => {
-        this.setState({isVrViewPlaying: false});
+        if (!this.props.page.autoplay) {
+          this.setState({isVrViewPlaying: false});
+        }
       };
 
       this.onCardboardButtonClick = () => {
@@ -59,6 +61,7 @@
                                        onQualityMenuItemClick={props.onQualityChange}>
 
           <VrView videoId={props.page.videoId}
+                  autoplay={props.page.autoplay}
                   startYaw={props.page.startYaw}
                   quality={this.activeQuality()}
                   isStereo={props.page.isStereo}
