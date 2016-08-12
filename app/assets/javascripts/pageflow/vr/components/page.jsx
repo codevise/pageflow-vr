@@ -49,6 +49,7 @@
       return (
         <PageWithInteractiveBackground page={props.page}
                                        playButtonIconName="pageflow-vr.play"
+                                       defaultControlBarText={props.i18n.t('pageflow.public.vr.start')}
                                        qualityMenuButtonTitle={props.i18n.t('pageflow.public.vr.select_quality')}
                                        qualityMenuItems={this.qualityMenuItems()}
                                        additionalMenuBarButtons={this.additionalMenuBarButtons()}

@@ -15,7 +15,8 @@ pageflow.vr.ConfigurationEditorView = pageflow.ConfigurationEditorView.extend({
 
     this.tab('files', function() {
       this.input('video_id', pageflow.FileInputView, {
-        collection: 'video_files'
+        collection: 'video_files',
+        positioning: false
       });
       this.input('is_stereo', pageflow.CheckBoxInputView);
       this.input('start_yaw', pageflow.SliderInputView, {

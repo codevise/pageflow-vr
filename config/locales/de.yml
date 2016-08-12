@@ -9,6 +9,9 @@ de:
         video_id:
           inline_help: Video in dem der Benutzer sich umsehen kann.
           label: 360°-Video
+        poster_id:
+          inline_help: Wird angezeigt während das 360°-Video lädt. Wenn kein Poster ausgewählt ist, wird das erste Frame des Videos verwendet. Auf das Posterbild wird die gleiche Projektion angewendet, wie auf das Video.
+          label: 360°-Posterbild
         is_stereo:
           inline_help: Gibt an, ob das Video im "Stacked Stereo" Format ist.
           label: Stereo
@@ -35,12 +38,12 @@ de:
 
     public:
       vr:
-        start: "360° Video starten"
+        start: "360° Video ansehen"
         start_cardboard: "Cardboard-Modus starten"
         select_quality: "Video-Qualität auswählen"
         video_qualities:
           high: "720p"
-          fullhd: "1980p"
+          fullhd: "1080p"
           4k: "2160p"
         video_quality_annotations:
           high: "HD"
