@@ -2,7 +2,7 @@ pageflow.vr.Player = pageflow.Object.extend({
   initialize: function(iframe) {
     this.iframe = iframe;
     this.cachedVolume = 1;
-    this.cachedPaused = true;
+    this.cachedPaused = iframe.src.indexOf('no_autoplay=true') >= 0;
   },
 
   play: function() {
@@ -43,9 +43,11 @@ pageflow.vr.Player = pageflow.Object.extend({
 });
 
 pageflow.vr.Player.create = function(iframe) {
-  var player = iframe ?
-    new pageflow.vr.Player(iframe):
-    new pageflow.AudioPlayer.Null();
+  if (!iframe) {
+    return null;
+  }
+
+  var player = new pageflow.vr.Player(iframe);
 
   pageflow.mediaPlayer.enhance(player, {
     volumeFading: true

@@ -17,12 +17,12 @@
       };
 
       this.onEnterBackground = () => {
-        this.setState({isVrViewPlaying: true});
+        this.setState({isInBackground: true});
       };
 
       this.onLeaveBackground = () => {
         if (!this.props.page.autoplay) {
-          this.setState({isVrViewPlaying: false});
+          this.setState({isInBackground: false});
         }
       };
 
@@ -65,7 +65,7 @@
                   startYaw={props.page.startYaw}
                   quality={this.activeQuality()}
                   isStereo={props.page.isStereo}
-                  isPlaying={this.state.isVrViewPlaying}
+                  isPlaying={props.pageState.isActive && (this.state.isInBackground || props.page.autoplay)}
                   isCardboardModeRequested={this.state.isCardboardModeRequested}
                   onExitCardboardMode={this.onExitCardboardMode} />
         </PageWithInteractiveBackground>
@@ -132,16 +132,18 @@
     }
 
     availableQualitiesInDescendingOrder() {
-      return ['4k', 'fullhd', 'high'].filter(quality => this.props.page.videoFile && this.props.page.videoFile[quality]);
+      return ['4k', 'fullhd', 'high'].filter(quality =>
+        this.props.page.videoFile && this.props.page.videoFile[quality]
+      );
     }
   }
 
   const {resolve, mutate,
-         createPage, createContainer} = pageflow.react;
+         createPage, createContainer, withPageStateProp} = pageflow.react;
 
   const qualitySetting = 'vr.videoQuality';
 
-  pageflow.vr.Page = createPage(createContainer(Page, {
+  pageflow.vr.Page = createPage(createContainer(withPageStateProp(Page), {
     fragments: {
       i18n: resolve('i18n'),
       page: {

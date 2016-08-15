@@ -1,16 +1,20 @@
 (function() {
-  const resolve = pageflow.react.resolve;
-
   class VrView extends React.Component {
     constructor(props, context) {
       super(props, context);
 
+      this._autoplay = false;
+
       this.bindPlayer = iframe => {
-        this.player = pageflow.ppp = pageflow.vr.Player.create(iframe);
+        this.player = pageflow.vr.Player.create(iframe);
       };
     }
 
     componentWillReceiveProps(nextProps) {
+      if (!this.props.pageState.isPrepared && nextProps.pageState.isPrepared) {
+        this._autoplay = nextProps.isPlaying;
+      }
+
       if (!this.player) {
         return;
       }
@@ -43,7 +47,7 @@
     }
 
     renderIframeIfPrepared() {
-      if (this.props.pageState.isPrepared && source(this.props)) {
+      if (this.props.pageState.isPrepared && this.source()) {
         return this.renderIframe();
       }
     }
@@ -54,36 +58,26 @@
                 className="pageflow_vr-vr_view-frame"
                 allowFullScreen
                 frameBorder="0"
-                src={source(this.props)}>
+                src={this.source()}>
         </iframe>
       );
     }
 
-    pageWillActivate() {
-      if (this.player && this.props.autoplay) {
-        this.player.playAndFadeIn(1000);
+    source() {
+      const props = this.props;
+
+      if (!props.videoFile || !props.videoFile[props.quality]) {
+        return null;
       }
-    }
 
-    pageWillDeactivate() {
-      if (this.player) {
-        this.player.fadeOutAndPause(1000);
-      }
+      return url({
+        video: props.videoFile[props.quality],
+        preview: props.videoFile.poster,
+        is_stereo: props.isStereo ? 'true' : 'false',
+        start_yaw: props.startYaw,
+        no_autoplay: !this._autoplay
+      });
     }
-  }
-
-  function source(props) {
-    if (!props.videoFile || !props.videoFile[props.quality]) {
-      return null;
-    }
-
-    return url({
-      video: props.videoFile[props.quality],
-      preview: props.videoFile.poster,
-      is_stereo: props.isStereo ? 'true' : 'false',
-      start_yaw: props.startYaw,
-      no_autoplay: true
-    });
   }
 
   function url(params) {
@@ -94,10 +88,10 @@
     return `/vrview/index.html?${paramsString}`;
   }
 
-  const {withPageLifecycle, withPageStateProp} = pageflow.react;
+  const {createContainer, withPageStateProp, resolve} = pageflow.react;
 
-  pageflow.vr.VrView = pageflow.react.createContainer(
-    withPageStateProp(withPageLifecycle(VrView)),
+  pageflow.vr.VrView = createContainer(
+    withPageStateProp(VrView),
     {
       fragments: {
         videoFile: resolve('videoFile', {
