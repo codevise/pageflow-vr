@@ -1,6 +1,8 @@
 @include pageflow-page-type("vr");
 @include pageflow-page-type-pictograms("vr");
 
+$vr-loading-indicator-color: #fff !default;
+
 $vr-no-vr-background-color: rgba(17, 17, 17, 0.9) !default;
 
 $vr-no-vr-icon-color: #555 !default;
@@ -18,6 +20,28 @@ $vr-no-vr-icon-color: #555 !default;
   left: 0;
   height: 100%;
   width: 100%;;
+}
+
+.pageflow_vr-page_loading_indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  @include transform(translate(-50%, -50%));
+  @include transition(opacity 0.5s, visibility 0.5s);
+}
+
+.pageflow_vr-page_loading_indicator_icon {
+  display: block;
+  width: 200px;
+  height: 200px;
+  fill: $vr-loading-indicator-color;
+  @include animation(pageflow_vr-blink 3s infinite ease);
+}
+
+.pageflow_vr-page_loading_indicator-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .pageflow_vr-no_vr_view {
@@ -43,5 +67,19 @@ $vr-no-vr-icon-color: #555 !default;
     fill: $vr-no-vr-icon-color;
     margin: 0 auto 20px auto;
     display: block;
+  }
+}
+
+@include keyframes(pageflow_vr-blink) {
+  0% {
+    opacity: 0.7;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+
+  100% {
+    opacity: 0.7;
   }
 }

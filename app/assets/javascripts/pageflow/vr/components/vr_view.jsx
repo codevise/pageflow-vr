@@ -6,7 +6,27 @@
       this._autoplay = false;
 
       this.bindPlayer = iframe => {
+        if (this.player) {
+          this.player.dispose();
+        }
+
         this.player = pageflow.vr.Player.create(iframe);
+
+        if (this.player) {
+          this.player.on({
+            loading: () => {
+              if (this.props.onLoading) {
+                this.props.onLoading();
+              }
+            },
+
+            ready: () => {
+              if (this.props.onReady) {
+                this.props.onReady();
+              }
+            }
+          });
+        }
       };
     }
 
@@ -71,6 +91,7 @@
       }
 
       return url({
+        id: props.id,
         video: props.videoFile[props.quality],
         preview: props.videoFile.poster,
         is_stereo: props.isStereo ? 'true' : 'false',

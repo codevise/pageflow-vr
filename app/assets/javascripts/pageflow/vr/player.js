@@ -3,6 +3,18 @@ pageflow.vr.Player = pageflow.Object.extend({
     this.iframe = iframe;
     this.cachedVolume = 1;
     this.cachedPaused = iframe.src.indexOf('no_autoplay=true') >= 0;
+    this.id = getIdParam(iframe.src);
+
+    this.messageListener = this.onMessage.bind(this);
+
+    if (this.id) {
+      window.addEventListener('message', this.messageListener);
+    }
+  },
+
+  dispose: function() {
+    this.off(null, null, null);
+    window.removeEventListener('message', this.messageListener);
   },
 
   play: function() {
@@ -39,8 +51,23 @@ pageflow.vr.Player = pageflow.Object.extend({
       command: name,
       value: value
     }, '*');
+  },
+
+  onMessage: function(event) {
+    var message = event.data;
+
+    if (message.type == 'VrViewEvent' &&
+        message.vrViewId == this.id) {
+
+      this.trigger(message.event, message.eventData);
+    }
   }
 });
+
+function getIdParam(url) {
+  var result = url.match(/id=(\d+)/);
+  return result && result[1];
+}
 
 pageflow.vr.Player.create = function(iframe) {
   if (!iframe) {

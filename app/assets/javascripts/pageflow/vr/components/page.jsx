@@ -1,7 +1,9 @@
 (function() {
+  const {classNames} = pageflow.react;
+
   const {
     PageWithInteractiveBackground, PageBackgroundImage,
-    PageWrapper, PageBackground, PageShadow, PageContent, PageHeader, PageText
+    PageWrapper, PageBackground, PageShadow, PageContent, PageHeader, PageText, Icon,
   } = pageflow.react.components;
 
   const {
@@ -13,7 +15,16 @@
       super(props, context);
 
       this.state = {
+        isVrViewReady: false,
         isVrViewPlaying: false
+      };
+
+      this.onVrViewLoading = () => {
+        this.setState({isVrViewReady: false});
+      };
+
+      this.onVrViewReady = () => {
+        this.setState({isVrViewReady: true});
       };
 
       this.onEnterBackground = () => {
@@ -60,15 +71,30 @@
                                        onLeaveBackground={this.onLeaveBackground}
                                        onQualityMenuItemClick={props.onQualityChange}>
 
-          <VrView videoId={props.page.videoId}
+          <VrView id={props.page.permaId}
+                  videoId={props.page.videoId}
                   autoplay={props.page.autoplay}
                   startYaw={props.page.startYaw}
                   quality={this.activeQuality()}
                   isStereo={props.page.isStereo}
                   isPlaying={props.pageState.isActive && (this.state.isInBackground || props.page.autoplay)}
                   isCardboardModeRequested={this.state.isCardboardModeRequested}
+                  onLoading={this.onVrViewLoading}
+                  onReady={this.onVrViewReady}
                   onExitCardboardMode={this.onExitCardboardMode} />
+
+          {this.renderLoadingIndicator()}
         </PageWithInteractiveBackground>
+      );
+    }
+
+    renderLoadingIndicator() {
+      const className = classNames('pageflow_vr-page_loading_indicator',
+                                   {'pageflow_vr-page_loading_indicator-hidden': this.state.isVrViewReady});
+      return (
+        <div className={className}>
+          <Icon name="pageflow-vr.play" className="pageflow_vr-page_loading_indicator_icon" />
+        </div>
       );
     }
 
