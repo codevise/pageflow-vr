@@ -106,7 +106,7 @@
       `${key}=${params[key]}`
     ).join('&');
 
-    return `/vrview/index.html?${paramsString}`;
+    return `/pageflow_vr/vrview.html?${paramsString}`;
   }
 
   const {createContainer, withPageStateProp, resolve} = pageflow.react;

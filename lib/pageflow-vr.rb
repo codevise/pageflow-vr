@@ -22,5 +22,11 @@ module Pageflow
                                        'pageflow.vr.Page',
                                        thumbnail_candidates: PAGE_TYPE_THUMBNAIL_CANDIDATES)
     end
+
+    def self.routes(router)
+      router.instance_eval do
+        mount Pageflow::Vr::Engine, at: '/pageflow_vr'
+      end
+    end
   end
 end
