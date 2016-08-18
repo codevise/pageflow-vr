@@ -93,7 +93,7 @@
       return url({
         id: props.id,
         video: props.videoFile[props.quality],
-        preview: props.videoFile.poster,
+        preview: props.posterFile ? props.posterFile.ultra : props.videoFile.poster,
         is_stereo: props.isStereo ? 'true' : 'false',
         start_yaw: props.startYaw,
         no_autoplay: !this._autoplay
@@ -117,6 +117,9 @@
       fragments: {
         videoFile: resolve('videoFile', {
           property: 'videoId'
+        }),
+        posterFile: resolve('imageFile', {
+          property: 'posterId'
         })
       }
     }

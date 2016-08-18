@@ -24,6 +24,10 @@ pageflow.vr.ConfigurationEditorView = pageflow.ConfigurationEditorView.extend({
         unit: '°',
         maxValue: 360
       });
+      this.input('poster_id', pageflow.FileInputView, {
+        collection: 'image_files',
+        positioning: false
+      });
       this.input('thumbnail_image_id', pageflow.FileInputView, {
         collection: 'image_files',
         positioning: false

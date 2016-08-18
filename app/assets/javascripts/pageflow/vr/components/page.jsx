@@ -73,6 +73,7 @@
 
           <VrView id={props.page.permaId}
                   videoId={props.page.videoId}
+                  posterId={props.page.posterId}
                   autoplay={props.page.autoplay}
                   startYaw={props.page.startYaw}
                   quality={this.activeQuality()}
