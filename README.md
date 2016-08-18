@@ -1,36 +1,60 @@
-# Pageflow::Vr
+# Pageflow VR
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/pageflow/vr`. To experiment with that code, run `bin/console` for an interactive prompt.
+[![Gem Version](https://badge.fury.io/rb/pageflow-vr.svg)](http://badge.fury.io/rb/pageflow-vr)
 
-TODO: Delete this and the text above, and describe your gem
+Page type to display 360° videos.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-```ruby
-gem 'pageflow-vr'
-```
+    # Gemfile
+    gem 'pageflow-vr'
 
-And then execute:
+Register the plugin:
 
-    $ bundle
+    # config/initializers/pageflow.rb
+    Pageflow.configure do |config|
+      config.plugin(Pageflow::Vr.plugin)
+    end
 
-Or install it yourself as:
+Include javascripts and stylesheets:
 
-    $ gem install pageflow-vr
+    # app/assets/javascripts/components.js
+    //= require "pageflow/vr/components"
 
-## Usage
+    # app/assets/javascripts/pageflow/application.js
+    //= require "pageflow/vr"
 
-TODO: Write usage instructions here
+    # app/assets/javascripts/pageflow/editor.js
+    //= require pageflow/vr/editor
 
-## Development
+    # app/assets/stylesheets/pageflow/themes/default.css.scss
+    @import "pageflow/vr/themes/default";
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+Install the routes:
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+    # config/routes.rb
+    MyPageflow::Application.routes.draw do
+      Pageflow::Vr.routes(self)
+    end
 
-## Contributing
+Execute `bundle install` and restart the application server.
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/pageflow-vr. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Now you can enable the page type in your feature settings.
 
+## Troubleshooting
+
+If you run into problems while installing the page type, please also
+refer to the
+[Troubleshooting](https://github.com/codevise/pageflow/wiki/Troubleshooting)
+wiki page in the
+[Pageflow repository](https://github.com/codevise/pageflow). If that
+doesn't help, consider
+[filing an issue](https://github.com/codevise/pageflow-vr/issues).
+
+## Contributing Locales
+
+Edit the translations directly on the
+[pageflow-vr](http://www.localeapp.com/projects/public?search=tf/pageflow-vr)
+locale project.
