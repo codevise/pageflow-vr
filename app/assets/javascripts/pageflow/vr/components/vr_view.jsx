@@ -39,7 +39,10 @@
         return;
       }
 
-      if (!this.props.isPlaying && nextProps.isPlaying) {
+      if (nextProps.isPlaying) {
+        // Calling play while already playing is no-op. Since play
+        // might fail when not inside user gesture, always try to play
+        // when prop is set.
         this.player.play();
       }
       else if (this.props.isPlaying && !nextProps.isPlaying) {
