@@ -154,8 +154,13 @@
         return this.props.requestedQuality;
       }
       else {
-        return this.availableQualitiesInDescendingOrder()[0];
+        return this.fullHdOrHighQuality();
       }
+    }
+
+    fullHdOrHighQuality() {
+      var qualities = this.availableQualitiesInDescendingOrder();
+      return qualities[1] || qualities[0];
     }
 
     availableQualitiesInDescendingOrder() {
