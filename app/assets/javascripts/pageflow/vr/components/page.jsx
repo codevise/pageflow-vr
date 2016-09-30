@@ -77,7 +77,6 @@
                   autoplay={props.page.autoplay}
                   startYaw={props.page.startYaw}
                   quality={this.activeQuality()}
-                  isStereo={props.page.isStereo}
                   isPlaying={props.pageState.isActive && (this.state.isInBackground || props.page.autoplay)}
                   isCardboardModeRequested={this.state.isCardboardModeRequested}
                   onLoading={this.onVrViewLoading}

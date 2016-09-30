@@ -16,16 +16,17 @@ pageflow.vr.ConfigurationEditorView = pageflow.ConfigurationEditorView.extend({
     this.tab('files', function() {
       this.input('video_id', pageflow.FileInputView, {
         collection: 'video_files',
+        filter: 'with_projection',
         positioning: false
       });
       this.input('autoplay', pageflow.CheckBoxInputView);
-      this.input('is_stereo', pageflow.CheckBoxInputView);
       this.input('start_yaw', pageflow.SliderInputView, {
         unit: '°',
         maxValue: 360
       });
       this.input('poster_id', pageflow.FileInputView, {
         collection: 'image_files',
+        filter: 'with_projection',
         positioning: false
       });
       this.input('thumbnail_image_id', pageflow.FileInputView, {

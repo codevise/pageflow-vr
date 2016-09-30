@@ -130,7 +130,7 @@ unterstützen Browsern angezeigt wird.
           video_files:
             projection:
               label: "360° Projektion"
-              inline_help: "Lege fest, ob es sich um ein mono- oder stereoskopisches 360°-Video handelt. Dieses kann dann mit dem Seitentyp '360° Video' zu einer interaktiven Szene gemacht werden."
+              inline_help: "Lege fest, ob es sich um ein mono- oder stereoskopisches 360°-Video handelt. Dieses kann mit dem Seitentyp '360° Video' zu einer interaktiven Szene gemacht werden."
               values:
                 equirectangular_mono: "Equirectangular (Mono)"
                 equirectangular_stereo: "Equirectangular (Stereo)"
@@ -143,7 +143,7 @@ unterstützen Browsern angezeigt wird.
           image_files:
             projection:
               label: "360° Projektion"
-              inline_help: "Lege fest, ob es sich um ein mono- oder stereoskopisches 360°-'Bild handelt. Diese können dann als Posterbild für 360°-Videos verwendet werden."
+              inline_help: "Lege fest, ob es sich um ein mono- oder stereoskopisches 360°-'Bild handelt. Diese können als Posterbild für 360°-Videos verwendet werden."
               values:
                 equirectangular_mono: "Equirectangular (Mono)"
                 equirectangular_stereo: "Equirectangular (Stereo)"

@@ -125,7 +125,7 @@
         id: props.id,
         video: props.videoFile[props.quality],
         preview: props.posterFile ? props.posterFile.ultra : props.videoFile.poster,
-        is_stereo: props.isStereo ? 'true' : 'false',
+        is_stereo: props.videoFile.projection == 'equirectangular_stereo' ? 'true' : 'false',
         start_yaw: props.startYaw,
         start_time: this._startTime,
         no_autoplay: !this._autoplay
