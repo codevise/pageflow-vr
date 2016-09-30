@@ -3,8 +3,72 @@ de:
     vr:
       help_entries:
         page_type:
-          menu_item: Virtual Reality
-          text: ! '# Virtual Reality'
+          menu_item: "360° Video"
+          text: ! '# 360° Video
+
+_Zeigt ein interaktives Video an, in dem sich der Benutzer umsehen kann._
+
+
+Das Video muss im Format "equirectangular-panoramic" erstellt worden
+sein (siehe auch [Plattkarte auf
+Wikipedia](https://de.wikipedia.org/wiki/Plattkarte)). Es können
+sowohl mono- als auch stereoskopische Videos verwendet werden:
+
+
+* Mono-Videos müssen das Seitenverhältnis 2:1 besitzen (z.B. 4096 x
+  2048).
+
+* Stereo-Videos müssen das Seitenverhältnis 1:1 besitzen (z.B. 4096 x
+  4096) wobei sich die zwei Bildbereiche dann übereinander befinden.
+
+
+Wähle die zum Video passende Projektion beim Upload des Videos in den
+Datei-Einstellungen aus.
+
+
+In den Einstellungen der Seite kannst du das zu verwendende Video dann
+auf dem Tab "Dateien" festlegen. Bei der Auswahl des Videos werden nur
+Dateien anzeigt, die beim Upload durch Auswahl einer Projektion als
+360°-Videos markiert wurden. Solltest du beim Upload vergessen haben,
+eine Projektion festzulegen, kannst du dies jederzeit in den
+Einstellungen der Datei nachholen. Klicke dazu im Hauptmenü auf
+"Dateien verwalten", suche das 360°-Video in der Liste heraus und
+klicke auf den Button mit dem Zahnrad-Symbol.
+
+
+Der initiale Blickwinkel kann ebenfalls auf dem Tab "Dateien" in den
+Einstellungen der Seite gewählt werden. Über die "Autoplay" Option
+steuerst du, ob das Video direkt beim Erreichen der Seite starten soll
+oder erst wenn der User den Play-Button aktiviert. Beachte, dass ein
+automatisches Abspielen auf mobilen Geräten z.T. aus technischen
+Gründen nicht möglich ist.
+
+
+Folgende Browser unterstützen die Wiedergabe von 360°-Videos:
+
+
+* Aktuelle Versionen von Chrome und Firefox auf OSX, Linux und Windows.
+
+* Aktuelle Versionen von Safari auf OSX.
+
+* Aktuelle Versionen von Chrome auf Android.
+
+* Aktuelle Versionen von Internet Explorer 11 und Edge auf Windows.
+
+
+Für nicht unterstützte Plattformen kannst du einen Link zu einem
+YouTube-Video hinterlegen. Auf iOS-Geräten kann das 360°-Video dann in
+der YouTube-App angesehen werden. Alle Optionen zur Darstellung der
+Seite, die angezeigt wird, falls keine 360°-Videos untersützt werden,
+findest du auf dem Tab "Fallback". Es kann auch ein Text festgelegt
+werden, um dem Benutzer zu erklären, dass sein Browser das Video nicht
+anzeigen kann.
+
+
+Über die Option "Fallback Vorschau ansehen" kannst du vorübergehend
+eine Vorschau der Seite ansehen, wie sie Benutzer mit nicht
+unterstützen Browsern angezeigt wird.
+          '
       page_attributes:
         video_id:
           inline_help: Video in dem der Benutzer sich umsehen kann.
@@ -59,3 +123,38 @@ de:
       configuration_editor:
         tabs:
           vr_fallback: Fallback
+
+    editor:
+      files:
+        attributes:
+          video_files:
+            projection:
+              label: "360° Projektion"
+              inline_help: "Lege fest, ob es sich um ein mono- oder stereoskopisches 360°-Video handelt. Dieses kann dann mit dem Seitentyp '360° Video' zu einer interaktiven Szene gemacht werden."
+              values:
+                equirectangular_mono: "Equirectangular (Mono)"
+                equirectangular_stereo: "Equirectangular (Stereo)"
+
+              column_header: "Projektion"
+              cell_text:
+                blank: "(Kein)"
+                equirectangular_mono: "Equirectangular (Mono)"
+                equirectangular_stereo: "Equirectangular (Stereo)"
+          image_files:
+            projection:
+              label: "360° Projektion"
+              inline_help: "Lege fest, ob es sich um ein mono- oder stereoskopisches 360°-'Bild handelt. Diese können dann als Posterbild für 360°-Videos verwendet werden."
+              values:
+                equirectangular_mono: "Equirectangular (Mono)"
+                equirectangular_stereo: "Equirectangular (Stereo)"
+
+              column_header: "Projektion"
+              cell_text:
+                blank: "(Kein)"
+                equirectangular_mono: "Equirectangular (Mono)"
+                equirectangular_stereo: "Equirectangular (Stereo)"
+        filters:
+          video_files:
+            with_projection: "360° Videos"
+          image_files:
+            with_projection: "360° Bilder"
