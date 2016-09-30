@@ -43275,6 +43275,7 @@ var DeviceMotionReceiver = _dereq_('./device-motion-receiver');
 var dmr = new DeviceMotionReceiver();
 
 var PlayerCommandReceiver = _dereq_('./player-command-receiver');
+var PlayerEventDispatcher = _dereq_('./player-event-dispatcher');
 
 window.addEventListener('load', init);
 
@@ -43357,6 +43358,11 @@ function onSceneLoad(scene) {
       videoElement = document.createElement('video');
       videoElement.src = scene.video;
       videoElement.loop = true;
+
+      if (scene.startTime) {
+        videoElement.currentTime = scene.startTime;
+      }
+
       videoElement.setAttribute('crossorigin', 'anonymous');
       videoElement.addEventListener('timeupdate', onVideoPlay);
       videoElement.addEventListener('error', onVideoError);
@@ -43371,6 +43377,7 @@ function onSceneLoad(scene) {
       }
 
       new PlayerCommandReceiver(videoElement, renderer);
+      new PlayerEventDispatcher(videoElement, dispatchEvent);
     }
   } else if (scene.image) {
     // Otherwise, just render the photosphere.
@@ -43473,7 +43480,7 @@ function loop(time) {
 }
 requestAnimationFrame(loop);
 
-},{"../node_modules/es6-promise/dist/es6-promise.min":2,"../node_modules/stats-js/build/stats.min":3,"../node_modules/webvr-polyfill/build/webvr-polyfill":8,"./device-motion-receiver":9,"./loading-indicator":12,"./photosphere-renderer":14,"./player-command-receiver":15,"./scene-loader":17,"./util":18}],14:[function(_dereq_,module,exports){
+},{"../node_modules/es6-promise/dist/es6-promise.min":2,"../node_modules/stats-js/build/stats.min":3,"../node_modules/webvr-polyfill/build/webvr-polyfill":8,"./device-motion-receiver":9,"./loading-indicator":12,"./photosphere-renderer":14,"./player-command-receiver":15,"./player-event-dispatcher":16,"./scene-loader":18,"./util":19}],14:[function(_dereq_,module,exports){
 /*
  * Copyright 2015 Google Inc. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -43737,7 +43744,7 @@ PhotosphereRenderer.prototype.onResize_ = function() {
 
 module.exports = PhotosphereRenderer;
 
-},{"../node_modules/three/examples/js/controls/VRControls":4,"../node_modules/three/examples/js/effects/VREffect":5,"../node_modules/three/three":6,"../node_modules/webvr-boilerplate/build/webvr-manager":7,"./emitter":10,"./eyes":11,"./util":18,"./vertex-distorter":19}],15:[function(_dereq_,module,exports){
+},{"../node_modules/three/examples/js/controls/VRControls":4,"../node_modules/three/examples/js/effects/VREffect":5,"../node_modules/three/three":6,"../node_modules/webvr-boilerplate/build/webvr-manager":7,"./emitter":10,"./eyes":11,"./util":19,"./vertex-distorter":20}],15:[function(_dereq_,module,exports){
 /*
  * Copyright 2015 Google Inc. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -43807,6 +43814,48 @@ module.exports = PlayerCommandReceiver;
  * limitations under the License.
  */
 
+
+/**
+ * Sends messages to parent frame for media element events.
+ */
+function PlayerEventDispatcher(player, dispatch) {
+  this.player = player;
+  this.dispatch = dispatch;
+
+  setupEvent('play');
+  setupEvent('timeupdate');
+  setupEvent('pause');
+  setupEvent('ended');
+
+  function setupEvent(name) {
+    player.addEventListener(name, function() {
+      dispatch(name, {
+        currentTime: player.currentTime,
+        currentSrc: player.currentSrc,
+        duration: player.duration
+      });
+    }, false);
+  }
+}
+
+module.exports = PlayerEventDispatcher;
+
+},{}],17:[function(_dereq_,module,exports){
+/*
+ * Copyright 2015 Google Inc. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /**
  * Contains all information about a given scene, including the photosphere asset,
  * background music.
@@ -43821,6 +43870,7 @@ function SceneInfo(opt_params) {
   this.audio = params.audio;
   this.video = params.video;
   this.yaw = params.yaw || 0;
+  this.startTime = params.startTime || 0;
   this.isYawOnly = params.isYawOnly;
   this.noAutoplay = !!params.noAutoplay;
 }
@@ -43838,6 +43888,7 @@ SceneInfo.prototype.toObject = function() {
     isStereo: this.isStereo,
     audio: this.audio,
     yaw: this.yaw || null,
+    startTime: this.startTime || null,
     video: this.video || null,
     noAutoplay: this.noAutoplay || null,
   };
@@ -43850,7 +43901,7 @@ SceneInfo.prototype.isImageDataURI = function() {
 
 module.exports = SceneInfo;
 
-},{}],17:[function(_dereq_,module,exports){
+},{}],18:[function(_dereq_,module,exports){
 /*
  * Copyright 2015 Google Inc. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -43878,6 +43929,7 @@ var Query = {
   IS_STEREO: 'is_stereo',
   AUDIO_URL: 'audio',
   START_YAW: 'start_yaw',
+  START_TIME: 'start_time',
   IS_YAW_ONLY: 'is_yaw_only',
   NO_AUTOPLAY: 'no_autoplay',
 };
@@ -43929,6 +43981,7 @@ SceneLoader.prototype.loadFromGetParams_ = function() {
     audio: Util.getQueryParameter(Query.AUDIO_URL),
     isYawOnly: this.parseBoolean_(Util.getQueryParameter(Query.IS_YAW_ONLY)),
     yaw: THREE.Math.degToRad(Util.getQueryParameter(Query.START_YAW)),
+    startTime: parseFloat(Util.getQueryParameter(Query.START_TIME)),
     noAutoplay: this.parseBoolean_(Util.getQueryParameter(Query.NO_AUTOPLAY)),
   };
 
@@ -43972,7 +44025,7 @@ SceneLoader.prototype.loadScene = function(callback) {
 
 module.exports = SceneLoader;
 
-},{"./emitter":10,"./scene-info":16}],18:[function(_dereq_,module,exports){
+},{"./emitter":10,"./scene-info":17}],19:[function(_dereq_,module,exports){
 /*
  * Copyright 2015 Google Inc. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -44102,7 +44155,7 @@ Util.isIE11 = function() {
 
 module.exports = Util;
 
-},{}],19:[function(_dereq_,module,exports){
+},{}],20:[function(_dereq_,module,exports){
 /*
  * Copyright 2015 Google Inc. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -44345,4 +44398,4 @@ VertexDistorter.prototype.getFov_ = function(opt_eye) {
 
 module.exports = VertexDistorter;
 
-},{"../node_modules/three/three":6,"./eyes":11,"./util":18}]},{},[13]);
+},{"../node_modules/three/three":6,"./eyes":11,"./util":19}]},{},[13]);
