@@ -4,6 +4,9 @@
       super(props, context);
 
       this._autoplay = false;
+      this._startTime = 0;
+      this._lastCurrentTime = -1;
+      this._lastSource = null;
 
       this.bindPlayer = iframe => {
         if (this.player) {
@@ -15,6 +18,8 @@
         if (this.player) {
           this.player.on({
             loading: () => {
+              this._lastCurrentTime = 0;
+
               if (this.props.onLoading) {
                 this.props.onLoading();
               }
@@ -23,6 +28,12 @@
             ready: () => {
               if (this.props.onReady) {
                 this.props.onReady();
+              }
+            },
+
+            timeupdate: (event) => {
+              if (this._lastCurrentTime >= 0) {
+                this._lastCurrentTime = event.currentTime;
               }
             }
           });
@@ -33,6 +44,10 @@
     componentWillReceiveProps(nextProps) {
       if (!this.props.pageState.isPrepared && nextProps.pageState.isPrepared) {
         this._autoplay = nextProps.isPlaying;
+      }
+
+      if (this.props.videoId != nextProps.videoId) {
+        this._lastCurrentTime = -1;
       }
 
       if (!this.player) {
@@ -81,9 +96,20 @@
                 className="pageflow_vr-vr_view-frame"
                 allowFullScreen
                 frameBorder="0"
-                src={this.source()}>
+                src={this.sourceWithUpdatingStartTime()}>
         </iframe>
       );
+    }
+
+    sourceWithUpdatingStartTime() {
+      // Only update the start time if the iframe src would change anyway
+      // to prevent reloading the iframe by only changing the start time.
+      if (this.source() != this._lastSource) {
+        this._startTime = this._lastCurrentTime >= 0 ? this._lastCurrentTime : 0;
+      }
+
+      this._lastSource = this.source();
+      return this._lastSource;
     }
 
     source() {
@@ -99,6 +125,7 @@
         preview: props.posterFile ? props.posterFile.ultra : props.videoFile.poster,
         is_stereo: props.isStereo ? 'true' : 'false',
         start_yaw: props.startYaw,
+        start_time: this._startTime,
         no_autoplay: !this._autoplay
       });
     }
