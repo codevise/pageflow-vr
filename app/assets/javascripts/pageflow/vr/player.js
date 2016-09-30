@@ -1,3 +1,6 @@
+//= require_self
+//= require ./player/media_events
+
 pageflow.vr.Player = pageflow.Object.extend({
   initialize: function(iframe) {
     this.iframe = iframe;
@@ -69,7 +72,7 @@ function getIdParam(url) {
   return result && result[1];
 }
 
-pageflow.vr.Player.create = function(iframe) {
+pageflow.vr.Player.create = function(iframe, options) {
   if (!iframe) {
     return null;
   }
@@ -79,6 +82,8 @@ pageflow.vr.Player.create = function(iframe) {
   pageflow.mediaPlayer.enhance(player, {
     volumeFading: true
   });
+
+  pageflow.vr.Player.mediaEvents(player, options.context);
 
   return player;
 };

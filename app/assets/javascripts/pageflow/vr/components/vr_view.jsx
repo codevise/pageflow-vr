@@ -13,7 +13,9 @@
           this.player.dispose();
         }
 
-        this.player = pageflow.vr.Player.create(iframe);
+        this.player = pageflow.vr.Player.create(iframe, {
+          context: this.context.mediaContext
+        });
 
         if (this.player) {
           this.player.on({
@@ -130,6 +132,10 @@
       });
     }
   }
+
+  VrView.contextTypes = {
+    mediaContext: React.PropTypes.object
+  };
 
   function url(params) {
     const paramsString = Object.keys(params).map((key) =>
