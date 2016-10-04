@@ -24,13 +24,13 @@ pageflow.vr.Player.mediaEvents = function(player, context) {
 
   function getBitrate(src) {
     if (src.match(/4k/)) {
-      return 3;
+      return 22000000;
     }
     else if (src.match(/fullhd/)) {
-      return 2;
+      return 6000000;
     }
     else {
-      return 1;
+      return 3500000;
     }
   }
 };
