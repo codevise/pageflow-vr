@@ -22,8 +22,10 @@ sowohl mono- als auch stereoskopische Videos verwendet werden:
   4096) wobei sich die zwei Bildbereiche dann übereinander befinden.
 
 
-Wähle die zum Video passende Projektion beim Upload des Videos in den
-Datei-Einstellungen aus.
+Die zum Video passende Projektion kann beim Upload des Videos in den
+Datei-Einstellungen ausgewählt werden. Standardmäßig wird für Video
+mit den oben genannten Seitenverhältnissen automatisch die
+entsprechende Projektion festgelegt.
 
 
 In den Einstellungen der Seite kannst du das zu verwendende Video dann
@@ -130,20 +132,23 @@ unterstützen Browsern angezeigt wird.
           video_files:
             projection:
               label: "360° Projektion"
-              inline_help: "Lege fest, ob es sich um ein mono- oder stereoskopisches 360°-Video handelt. Dieses kann mit dem Seitentyp '360° Video' zu einer interaktiven Szene gemacht werden."
+              inline_help: "Lege fest, ob es sich um ein mono- oder stereoskopisches 360°-Video handelt. Dieses kann mit dem Seitentyp '360° Video' zu einer interaktiven Szene gemacht werden. Vor dem Upload steht außerdem die Option 'Automatisch erkennen' zur Auswahl. Diese setzt den Wert für quadratische Videos auf 'Equirectangular (Stereo)', für Videos mit Seitenverhältnis 2:1 auf 'Equirectangular (Mono)'."
+              inline_help_disabled: "Legt fest, ob es sich um ein mono- oder stereoskopisches 360°-Video handelt. Sobald das Video verarbeitet wurde und die automatische Erkennung abgeschlossen ist, kann die Einstellung wieder bearbeitet werden."
               values:
+                auto_detect: "(Automatisch erkennen)"
                 equirectangular_mono: "Equirectangular (Mono)"
                 equirectangular_stereo: "Equirectangular (Stereo)"
 
               column_header: "Projektion"
               cell_text:
                 blank: "(Kein)"
+                auto_detect: "(Automatisch erkennen)"
                 equirectangular_mono: "Equirectangular (Mono)"
                 equirectangular_stereo: "Equirectangular (Stereo)"
           image_files:
             projection:
               label: "360° Projektion"
-              inline_help: "Lege fest, ob es sich um ein mono- oder stereoskopisches 360°-'Bild handelt. Diese können als Posterbild für 360°-Videos verwendet werden."
+              inline_help: "Lege fest, ob es sich um ein mono- oder stereoskopisches 360°-Bild handelt. Diese können als Posterbild für 360°-Videos verwendet werden."
               values:
                 equirectangular_mono: "Equirectangular (Mono)"
                 equirectangular_stereo: "Equirectangular (Stereo)"
