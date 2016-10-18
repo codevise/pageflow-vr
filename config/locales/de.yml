@@ -155,6 +155,10 @@ unterstützen Browsern angezeigt wird.
                 equirectangular_stereo: "Equirectangular (Stereo)"
         filters:
           video_files:
-            with_projection: "360° Videos"
+            with_projection:
+              name: "360° Videos"
+              blank_slate: "Gebe in den Datei-Einstellungen eines Videos eine Projektion an, um es als 360° Video zu markieren."
           image_files:
-            with_projection: "360° Bilder"
+            with_projection:
+              name: "360° Bilder"
+              blank_slate: "Gebe in den Datei-Einstellungen eines Bildes eine Projektion an, um es als 360° Bild zu markieren."
