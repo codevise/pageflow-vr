@@ -9,7 +9,7 @@ pageflow.editor.pageTypes.register('vr', {
 
 _(['video_files', 'image_files']).each(function(collectionName) {
   pageflow.editor.fileTypes.modify(collectionName, {
-    configurationEditorInputs: [function(model) {
+    configurationEditorInputs: function(model) {
       var values = ['equirectangular_mono', 'equirectangular_stereo'];
       var valuesWithAutoDetect = ['auto_detect'].concat(values);
 
@@ -42,7 +42,7 @@ _(['video_files', 'image_files']).each(function(collectionName) {
           inputViewOptions: options
         }
       ];
-    }],
+    },
 
     configurationUpdaters: [
       function(configuration, newAttributes) {
@@ -64,7 +64,8 @@ _(['video_files', 'image_files']).each(function(collectionName) {
       {
         name: 'with_projection',
         matches: function(file) {
-          return !!file.configuration.get('projection');
+          return !!file.configuration.get('projection') &&
+            file.configuration.get('projection') != 'auto_detect';
         }
       }
     ]
