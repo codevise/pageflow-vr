@@ -19,7 +19,6 @@ module Pageflow
 
     def self.page_type
       Pageflow::React.create_page_type('vr',
-                                       'pageflow.vr.Page',
                                        thumbnail_candidates: PAGE_TYPE_THUMBNAIL_CANDIDATES)
     end
 

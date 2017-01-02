@@ -44,7 +44,7 @@
     }
 
     componentWillReceiveProps(nextProps) {
-      if (!this.props.pageState.isPrepared && nextProps.pageState.isPrepared) {
+      if (!this.props.pageIsPrepared && nextProps.pageIsPrepared) {
         this._autoplay = nextProps.isPlaying;
       }
 
@@ -87,7 +87,7 @@
     }
 
     renderIframeIfPrepared() {
-      if (this.props.pageState.isPrepared && this.source()) {
+      if (this.props.pageIsPrepared && this.source()) {
         return this.renderIframe();
       }
     }
@@ -117,14 +117,14 @@
     source() {
       const props = this.props;
 
-      if (!props.videoFile || !props.videoFile[props.quality]) {
+      if (!props.videoFile || !props.videoFile.urls[props.quality]) {
         return null;
       }
 
       return url({
         id: props.id,
-        video: props.videoFile[props.quality],
-        preview: props.posterFile ? props.posterFile.ultra : props.videoFile.poster,
+        video: props.videoFile.urls[props.quality],
+        preview: props.posterFile ? props.posterFile.urls.ultra : props.videoFile.urls.poster_ultra,
         is_stereo: props.videoFile.projection == 'equirectangular_stereo' ? 'true' : 'false',
         start_yaw: props.startYaw,
         start_time: this._startTime,
@@ -145,19 +145,16 @@
     return `/pageflow_vr/vrview.html?${paramsString}`;
   }
 
-  const {createContainer, withPageStateProp, resolve} = pageflow.react;
+  const {connectInPage, combine} = pageflow.react;
+  const {pageIsPrepared, file, prop} = pageflow.react.selectors;
 
-  pageflow.vr.VrView = createContainer(
-    withPageStateProp(VrView),
-    {
-      fragments: {
-        videoFile: resolve('videoFile', {
-          property: 'videoId'
-        }),
-        posterFile: resolve('imageFile', {
-          property: 'posterId'
-        })
-      }
-    }
-  );
+  pageflow.vr.VrView = connectInPage(combine({
+    pageIsPrepared: pageIsPrepared(),
+    videoFile: file('videoFiles', {
+      id: prop('videoId')
+    }),
+    posterFile: file('imageFiles', {
+      id: prop('posterId')
+    })
+  }))(VrView);
 }());

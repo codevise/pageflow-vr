@@ -12,24 +12,23 @@
   }
 
   function text(props) {
-    return {__html: props.text || props.i18n.t('pageflow.public.vr.no_vr.text')};
+    return {__html: props.text || props.t('pageflow.public.vr.no_vr.text')};
   }
 
   function renderYouTubeLink(props) {
     if (props.youTubeUrl) {
       return (
         <a href={props.youTubeUrl} className="pageflow_vr-no_vr_view_link">
-          {props.i18n.t('pageflow.public.vr.no_vr.link')}
+          {props.t('pageflow.public.vr.no_vr.link')}
         </a>
       );
     }
   }
 
-  const {resolve} = pageflow.react;
+  const {connect, combine} = pageflow.react;
+  const {t} = pageflow.react.selectors;
 
-  pageflow.vr.NoVrView = pageflow.react.createContainer(NoVrView, {
-    fragments: {
-      i18n: resolve('i18n')
-    }
-  });
+  pageflow.vr.NoVrView = connect(combine({
+    t
+  }))(NoVrView);
 }());

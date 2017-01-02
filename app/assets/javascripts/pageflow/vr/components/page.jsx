@@ -62,8 +62,8 @@
       return (
         <PageWithInteractiveBackground page={props.page}
                                        playButtonIconName="pageflow-vr.play"
-                                       defaultControlBarText={props.i18n.t('pageflow.public.vr.start')}
-                                       qualityMenuButtonTitle={props.i18n.t('pageflow.public.vr.select_quality')}
+                                       defaultControlBarText={props.t('pageflow.public.vr.start')}
+                                       qualityMenuButtonTitle={props.t('pageflow.public.vr.select_quality')}
                                        qualityMenuItems={this.qualityMenuItems()}
                                        additionalMenuBarButtons={this.additionalMenuBarButtons()}
                                        onAdditionalButtonClick={this.onCardboardButtonClick}
@@ -77,7 +77,7 @@
                   autoplay={props.page.autoplay}
                   startYaw={props.page.startYaw}
                   quality={this.activeQuality()}
-                  isPlaying={props.pageState.isActive && (this.state.isInBackground || props.page.autoplay)}
+                  isPlaying={props.pageIsActive && (this.state.isInBackground || props.page.autoplay)}
                   isCardboardModeRequested={this.state.isCardboardModeRequested}
                   onLoading={this.onVrViewLoading}
                   onReady={this.onVrViewReady}
@@ -120,14 +120,14 @@
     }
 
     qualityMenuItems() {
-      const i18n = this.props.i18n;
+      const t = this.props.t;
       const activeQuality = this.activeQuality();
 
       return this.availableQualitiesInDescendingOrder().map(value => {
         return {
           value,
-          label: i18n.t(`pageflow.public.vr.video_qualities.${value}`),
-          annotation: i18n.t(`pageflow.public.vr.video_quality_annotations.${value}`),
+          label: t(`pageflow.public.vr.video_qualities.${value}`),
+          annotation: t(`pageflow.public.vr.video_quality_annotations.${value}`),
           active: activeQuality == value,
         };
       });
@@ -141,7 +141,7 @@
         return [
           {
             name: 'cardboard',
-            label: this.props.i18n.t('pageflow.public.vr.start_cardboard'),
+            label: this.props.t('pageflow.public.vr.start_cardboard'),
             iconName: 'pageflow-vr.cardboard'
           }
         ];
@@ -164,30 +164,36 @@
 
     availableQualitiesInDescendingOrder() {
       return ['4k', 'fullhd', 'high'].filter(quality =>
-        this.props.page.videoFile && this.props.page.videoFile[quality]
+        this.props.videoFile && this.props.videoFile.urls[quality]
       );
     }
   }
 
-  const {resolve, mutate,
-         createPage, createContainer, withPageStateProp} = pageflow.react;
+  const {registerPageType, connectInPage, combine} = pageflow.react;
+  const {pageAttributes, pageAttribute, pageIsActive, t, setting, file} = pageflow.react.selectors;
+  const {updateSetting} = pageflow.react.actions;
 
   const qualitySetting = 'vr.videoQuality';
 
-  pageflow.vr.Page = createPage(createContainer(withPageStateProp(Page), {
-    fragments: {
-      i18n: resolve('i18n'),
-      page: {
-        videoFile: resolve('videoFile', {
-          property: 'videoId'
+  registerPageType('vr', {
+    component: connectInPage(
+      combine({
+        page: pageAttributes(),
+        pageIsActive: pageIsActive(),
+        videoFile: file('videoFiles', {
+          id: pageAttribute('videoId')
         }),
-      },
-      requestedQuality: resolve('setting', {
-        property: qualitySetting
+        t,
+        requestedQuality: setting({
+          property: qualitySetting
+        })
       }),
-      onQualityChange: mutate('setting', {
-        property: qualitySetting
-      })
-    }
-  }));
+      {
+        onQualityChange: value => updateSetting({
+          property: qualitySetting,
+          value
+        })
+      }
+    )(Page)
+  });
 }());
