@@ -37,9 +37,11 @@ pageflow.vr.ConfigurationEditorView = pageflow.ConfigurationEditorView.extend({
 
     this.tab('vr_fallback', function() {
       this.input('preview_vr_fallback', pageflow.CheckBoxInputView);
-      this.input('fallback_image_id', pageflow.FileInputView, {
-        collection: 'image_files'
+
+      this.group('background', {
+        propertyNamePrefix: 'fallback'
       });
+
       this.input('fallback_text', pageflow.TextAreaInputView, {
         size: 'short'
       });

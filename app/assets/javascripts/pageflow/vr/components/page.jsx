@@ -2,9 +2,11 @@
   const {classNames} = pageflow.react;
 
   const {
-    PageWithInteractiveBackground, PageBackgroundImage,
-    PageWrapper, PageBackground, PageShadow, PageContent, PageHeader, PageText, Icon,
+    PageWithInteractiveBackground,
+    PageWrapper, PageContent, PageHeader, PageText, Icon,
   } = pageflow.react.components;
+
+  const {MediaPageBackground} = pageflow.react.components;
 
   const {
     VrView, NoVrView
@@ -103,10 +105,8 @@
 
       return (
         <PageWrapper>
-          <PageBackground>
-            <PageBackgroundImage page={props.page} imagePropertyBaseName="fallbackImage" />
-            <PageShadow page={props.page} />
-          </PageBackground>
+          <MediaPageBackground page={props.page}
+                               propertyNamePrefix="fallback" />
 
           <PageContent>
             <PageHeader page={props.page} />
@@ -169,7 +169,7 @@
     }
   }
 
-  const {registerPageType, connectInPage, combine} = pageflow.react;
+  const {registerPageType, connectInPage, combine, combineReducers} = pageflow.react;
   const {pageAttributes, pageAttribute, pageIsActive, t, setting, file} = pageflow.react.selectors;
   const {updateSetting} = pageflow.react.actions;
 
@@ -194,6 +194,10 @@
           value
         })
       }
-    )(Page)
+    )(Page),
+
+    reduxModules: [
+      pageflow.react.mediaPageBackgroundReduxModule
+    ]
   });
 }());

@@ -90,9 +90,21 @@ unterstützen Browsern angezeigt wird.
         preview_vr_fallback:
           label: "Fallback Vorschau ansehen"
           inline_help: Aktivieren Sie diese Option, um die Seite so zu sehen, wie sie angezeigt wird, wenn der Browser keine 360°-Videos unterstützt.
-        fallback_image_id:
+        fallback_background_type:
+          label: Fallback Typ
+          inline_help: Left fest, ob ein Bild oder ein Video angezeigt wird, wenn der Browser keine 360°-Videos unterstützt.
+          values:
+            image: "Hintergrund-Bild"
+            video: "Hintergrund-Video"
+        fallback_background_image_id:
           label: Fallback Bild
           inline_help: Bild, das angezeigt wird, wenn der Browser keine 360°-Videos unterstützt.
+        fallback_video_file_id:
+          label: Fallback Video
+          inline_help: Video, das angezeigt wird, wenn der Browser keine 360°-Videos unterstützt.
+        fallback_poster_image_id:
+          label: Fallback Video Poster
+          inline_help: Poster für Video, das angezeigt wird, wenn der Browser keine 360°-Videos unterstützt.
         fallback_text:
           label: Fallback Erklärtext
           inline_help: Text, der angezeigt wird, um zu erklären, dass der Browser keine 360°-Videos unterstützt. Leer lassen, um Standard-Text zu verwenden.
