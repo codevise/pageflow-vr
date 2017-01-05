@@ -194,6 +194,7 @@
     )(Page),
 
     reduxModules: [
+      pageflow.react.pageWithInteractiveBackgroundReduxModule,
       pageflow.react.mediaPageBackgroundReduxModule
     ]
   });
