@@ -43359,6 +43359,17 @@ function onSceneLoad(scene) {
       videoElement.src = scene.video;
       videoElement.loop = true;
 
+      if (Util.isMobile()) {
+        videoElement.muted = true;
+
+        function unmute() {
+          videoElement.muted = false;
+          window.removeEventListener('touchstart', unmute);
+        }
+
+        window.addEventListener('touchstart', unmute);
+      }
+
       if (scene.startTime) {
         videoElement.currentTime = scene.startTime;
       }
@@ -43367,14 +43378,17 @@ function onSceneLoad(scene) {
       videoElement.addEventListener('timeupdate', onVideoPlay);
       videoElement.addEventListener('error', onVideoError);
 
-      if (!loadedScene.noAutoplay) {
-        function onVideoLoad() {
+      function onVideoLoad() {
+        dispatchEvent('canplay');
+
+        if (!loadedScene.noAutoplay) {
           videoElement.play();
-          videoElement.removeEventListener('canplaythrough', onVideoLoad);
         }
 
-        videoElement.addEventListener('canplaythrough', onVideoLoad);
+        videoElement.removeEventListener('canplaythrough', onVideoLoad);
       }
+
+      videoElement.addEventListener('canplaythrough', onVideoLoad);
 
       new PlayerCommandReceiver(videoElement, renderer);
       new PlayerEventDispatcher(videoElement, dispatchEvent);

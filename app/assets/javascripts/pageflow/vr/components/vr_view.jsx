@@ -3,8 +3,6 @@
     constructor(props, context) {
       super(props, context);
 
-      this._autoplay = false;
-      this._startTime = 0;
       this._lastCurrentTime = -1;
       this._lastSource = null;
 
@@ -33,6 +31,12 @@
               }
             },
 
+            canplay: () => {
+              if (this.props.isPlaying) {
+                this.player.play();
+              }
+            },
+
             timeupdate: (event) => {
               if (this._lastCurrentTime >= 0) {
                 this._lastCurrentTime = event.currentTime;
@@ -44,10 +48,6 @@
     }
 
     componentWillReceiveProps(nextProps) {
-      if (!this.props.pageIsPrepared && nextProps.pageIsPrepared) {
-        this._autoplay = nextProps.isPlaying;
-      }
-
       if (this.props.videoId != nextProps.videoId) {
         this._lastCurrentTime = -1;
       }
@@ -128,7 +128,7 @@
         is_stereo: props.videoFile.projection == 'equirectangular_stereo' ? 'true' : 'false',
         start_yaw: props.startYaw,
         start_time: this._startTime,
-        no_autoplay: !this._autoplay
+        no_autoplay: true
       });
     }
   }
