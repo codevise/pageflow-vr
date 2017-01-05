@@ -34,9 +34,7 @@
       };
 
       this.onLeaveBackground = () => {
-        if (!this.props.page.autoplay) {
-          this.setState({isInBackground: false});
-        }
+        this.setState({isInBackground: false});
       };
 
       this.onCardboardButtonClick = () => {
