@@ -1,181 +1,110 @@
 de:
   pageflow:
-    vr:
-      help_entries:
-        page_type:
-          menu_item: "360° Video"
-          text: ! '# 360° Video
-
-_Zeigt ein interaktives Video an, in dem sich der Benutzer umsehen kann._
-
-
-Das Video muss im Format "equirectangular-panoramic" erstellt worden
-sein (siehe auch [Plattkarte auf
-Wikipedia](https://de.wikipedia.org/wiki/Plattkarte)). Es können
-sowohl mono- als auch stereoskopische Videos verwendet werden:
-
-
-* Mono-Videos müssen das Seitenverhältnis 2:1 besitzen (z.B. 4096 x
-  2048).
-
-* Stereo-Videos müssen das Seitenverhältnis 1:1 besitzen (z.B. 4096 x
-  4096) wobei sich die zwei Bildbereiche dann übereinander befinden.
-
-
-Die zum Video passende Projektion kann beim Upload des Videos in den
-Datei-Einstellungen ausgewählt werden. Standardmäßig wird für Video
-mit den oben genannten Seitenverhältnissen automatisch die
-entsprechende Projektion festgelegt.
-
-
-In den Einstellungen der Seite kannst Du das zu verwendende Video dann
-auf dem Tab "Dateien" festlegen. Bei der Auswahl des Videos werden nur
-Dateien anzeigt, die beim Upload durch Auswahl einer Projektion als
-360°-Videos markiert wurden. Solltest Du beim Upload vergessen haben,
-eine Projektion festzulegen, kannst Du dies jederzeit in den
-Einstellungen der Datei nachholen. Klicke dazu im Hauptmenü auf
-"Dateien verwalten", suche das 360°-Video in der Liste heraus und
-klicke auf den Button mit dem Zahnrad-Symbol.
-
-
-Der initiale Blickwinkel kann ebenfalls auf dem Tab "Dateien" in den
-Einstellungen der Seite gewählt werden. Über die "Autoplay" Option
-steuerst Du, ob das Video direkt beim Erreichen der Seite starten soll
-oder erst wenn der User den Play-Button aktiviert. Beachte, dass ein
-automatisches Abspielen auf mobilen Geräten z.T. aus technischen
-Gründen nicht möglich ist.
-
-
-Folgende Browser unterstützen die Wiedergabe von 360°-Videos:
-
-
-* Aktuelle Versionen von Chrome und Firefox auf OSX, Linux und Windows.
-
-* Aktuelle Versionen von Safari auf OSX.
-
-* Aktuelle Versionen von Chrome auf Android.
-
-* Aktuelle Versionen von Internet Explorer 11 und Edge auf Windows.
-
-
-Für nicht unterstützte Plattformen kannst Du einen Link zu einem
-YouTube-Video hinterlegen. Auf iOS-Geräten kann das 360°-Video dann in
-der YouTube-App angesehen werden. Alle Optionen zur Darstellung der
-Seite, die angezeigt wird, falls keine 360°-Videos unterstützt werden,
-findest Du auf dem Tab "Fallback". Es kann auch ein Text festgelegt
-werden, um dem Benutzer zu erklären, dass sein Browser das Video nicht
-anzeigen kann.
-
-
-Über die Option "Fallback Vorschau ansehen" kannst Du vorübergehend
-eine Vorschau der Seite ansehen, wie sie Benutzer mit nicht
-unterstützen Browsern angezeigt wird.
-          '
-      page_attributes:
-        video_id:
-          inline_help: Video in dem der Benutzer sich umsehen kann.
-          label: 360°-Video
-        poster_id:
-          inline_help: Wird angezeigt während das 360°-Video lädt. Wenn kein Poster ausgewählt ist, wird das erste Frame des Videos verwendet. Auf das Posterbild wird die gleiche Projektion angewendet, wie auf das Video.
-          label: 360°-Posterbild
-        is_stereo:
-          inline_help: Gibt an, ob das Video im "Stacked Stereo" Format ist.
-          label: Stereo
-        autoplay:
-          inline_help: Video im Hintergrund starten soblad die Seite erreicht wird. Auf mobilen Geräten ist dies aus technischen Gründen nicht möglich. Das Video startet, wenn der Benutzer auf den Play-Button klickt.
-          label: Autoplay
-        start_yaw:
-          inline_help: Bestimmt den initialen Blickwinkel im Video.
-          label: Start-Winkel
-        preview_vr_fallback:
-          label: "Fallback Vorschau ansehen"
-          inline_help: Aktivieren Sie diese Option, um die Seite so zu sehen, wie sie angezeigt wird, wenn der Browser keine 360°-Videos unterstützt.
-        fallback_background_type:
-          label: Fallback Typ
-          inline_help: Left fest, ob ein Bild oder ein Video angezeigt wird, wenn der Browser keine 360°-Videos unterstützt.
-          values:
-            image: "Hintergrund-Bild"
-            video: "Hintergrund-Video"
-        fallback_background_image_id:
-          label: Fallback Bild
-          inline_help: Bild, das angezeigt wird, wenn der Browser keine 360°-Videos unterstützt.
-        fallback_video_file_id:
-          label: Fallback Video
-          inline_help: Video, das angezeigt wird, wenn der Browser keine 360°-Videos unterstützt.
-        fallback_poster_image_id:
-          label: Fallback Video Poster
-          inline_help: Poster für Video, das angezeigt wird, wenn der Browser keine 360°-Videos unterstützt.
-        fallback_text:
-          label: Fallback Erklärtext
-          inline_help: Text, der angezeigt wird, um zu erklären, dass der Browser keine 360°-Videos unterstützt. Leer lassen, um Standard-Text zu verwenden.
-        fallback_you_tube_url:
-          label: Fallback YouTube URL
-          inline_help: YouTube Video, das verlinkt wird, wenn der Browser keine 360°-Videos unterstützt.
-      page_type_category_name: Interaktiv
-      page_type_description: Interaktive 360° Videos
-      page_type_feature_name: 360° Video Seitentyp
-      page_type_name: 360° Video
-
-
+    editor:
+      files:
+        attributes:
+          image_files:
+            projection:
+              cell_text:
+                blank: "(Kein)"
+                equirectangular_mono: Equirectangular (Mono)
+                equirectangular_stereo: Equirectangular (Stereo)
+              column_header: Projektion
+              inline_help: Lege fest, ob es sich um ein mono- oder stereoskopisches 360°-Bild handelt. Diese können als Posterbild für 360°-Videos verwendet werden.
+              label: 360° Projektion
+              values:
+                equirectangular_mono: Equirectangular (Mono)
+                equirectangular_stereo: Equirectangular (Stereo)
+          video_files:
+            projection:
+              cell_text:
+                auto_detect: "(Automatisch erkennen)"
+                blank: "(Kein)"
+                equirectangular_mono: Equirectangular (Mono)
+                equirectangular_stereo: Equirectangular (Stereo)
+              column_header: Projektion
+              inline_help: Lege fest, ob es sich um ein mono- oder stereoskopisches 360°-Video handelt. Dieses kann mit dem Seitentyp '360° Video' zu einer interaktiven Szene gemacht werden. Vor dem Upload steht außerdem die Option 'Automatisch erkennen' zur Auswahl. Diese setzt den Wert für quadratische Videos auf 'Equirectangular (Stereo)', für Videos mit Seitenverhältnis 2:1 auf 'Equirectangular (Mono)'.
+              inline_help_disabled: Legt fest, ob es sich um ein mono- oder stereoskopisches 360°-Video handelt. Sobald das Video verarbeitet wurde und die automatische Erkennung abgeschlossen ist, kann die Einstellung wieder bearbeitet werden.
+              label: 360° Projektion
+              values:
+                auto_detect: "(Automatisch erkennen)"
+                equirectangular_mono: Equirectangular (Mono)
+                equirectangular_stereo: Equirectangular (Stereo)
+        filters:
+          image_files:
+            with_projection:
+              blank_slate: Gebe in den Datei-Einstellungen eines Bildes eine Projektion an, um es als 360° Bild zu markieren.
+              name: 360° Bilder
+          video_files:
+            with_projection:
+              blank_slate: Gebe in den Datei-Einstellungen eines Videos eine Projektion an, um es als 360° Video zu markieren.
+              name: 360° Videos
     public:
       vr:
-        start: "360° Video ansehen"
-        start_cardboard: "Cardboard-Modus starten"
-        select_quality: "Video-Qualität auswählen"
-        video_qualities:
-          high: "720p"
-          fullhd: "1080p"
-          4k: "2160p"
-        video_quality_annotations:
-          high: "HD"
-          fullhd: "HD"
-          4k: "4K"
         no_vr:
-          text: "360°-Videos können in ihrem Browser nicht angezeigt werden."
-          link: "Video in der YouTube-App ansehen"
+          link: Video in der YouTube-App ansehen
+          text: 360°-Videos können in ihrem Browser nicht angezeigt werden.
+        select_quality: Video-Qualität auswählen
+        start: 360° Video ansehen
+        start_cardboard: Cardboard-Modus starten
+        video_qualities:
+          4k: 2160p
+          fullhd: 1080p
+          high: 720p
+        video_quality_annotations:
+          4k: 4K
+          fullhd: HD
+          high: HD
     ui:
       configuration_editor:
         tabs:
           vr_fallback: Fallback
-
-    editor:
-      files:
-        attributes:
-          video_files:
-            projection:
-              label: "360° Projektion"
-              inline_help: "Lege fest, ob es sich um ein mono- oder stereoskopisches 360°-Video handelt. Dieses kann mit dem Seitentyp '360° Video' zu einer interaktiven Szene gemacht werden. Vor dem Upload steht außerdem die Option 'Automatisch erkennen' zur Auswahl. Diese setzt den Wert für quadratische Videos auf 'Equirectangular (Stereo)', für Videos mit Seitenverhältnis 2:1 auf 'Equirectangular (Mono)'."
-              inline_help_disabled: "Legt fest, ob es sich um ein mono- oder stereoskopisches 360°-Video handelt. Sobald das Video verarbeitet wurde und die automatische Erkennung abgeschlossen ist, kann die Einstellung wieder bearbeitet werden."
-              values:
-                auto_detect: "(Automatisch erkennen)"
-                equirectangular_mono: "Equirectangular (Mono)"
-                equirectangular_stereo: "Equirectangular (Stereo)"
-
-              column_header: "Projektion"
-              cell_text:
-                blank: "(Kein)"
-                auto_detect: "(Automatisch erkennen)"
-                equirectangular_mono: "Equirectangular (Mono)"
-                equirectangular_stereo: "Equirectangular (Stereo)"
-          image_files:
-            projection:
-              label: "360° Projektion"
-              inline_help: "Lege fest, ob es sich um ein mono- oder stereoskopisches 360°-Bild handelt. Diese können als Posterbild für 360°-Videos verwendet werden."
-              values:
-                equirectangular_mono: "Equirectangular (Mono)"
-                equirectangular_stereo: "Equirectangular (Stereo)"
-
-              column_header: "Projektion"
-              cell_text:
-                blank: "(Kein)"
-                equirectangular_mono: "Equirectangular (Mono)"
-                equirectangular_stereo: "Equirectangular (Stereo)"
-        filters:
-          video_files:
-            with_projection:
-              name: "360° Videos"
-              blank_slate: "Gebe in den Datei-Einstellungen eines Videos eine Projektion an, um es als 360° Video zu markieren."
-          image_files:
-            with_projection:
-              name: "360° Bilder"
-              blank_slate: "Gebe in den Datei-Einstellungen eines Bildes eine Projektion an, um es als 360° Bild zu markieren."
+    vr:
+      help_entries:
+        page_type:
+          menu_item: 360° Video
+          text: "# 360° Video\n_Zeigt ein interaktives Video an, in dem sich der Benutzer umsehen kann._\n\nDas Video muss im Format \"equirectangular-panoramic\" erstellt worden sein (siehe auch [Plattkarte auf Wikipedia](https://de.wikipedia.org/wiki/Plattkarte)). Es können sowohl mono- als auch stereoskopische Videos verwendet werden:\n\n* Mono-Videos müssen das Seitenverhältnis 2:1 besitzen (z.B. 4096 x 2048).\n* Stereo-Videos müssen das Seitenverhältnis 1:1 besitzen (z.B. 4096 x 4096) wobei sich die zwei Bildbereiche dann übereinander befinden.\n\nDie zum Video passende Projektion kann beim Upload des Videos in den Datei-Einstellungen ausgewählt werden. Standardmäßig wird für Video mit den oben genannten Seitenverhältnissen automatisch die entsprechende Projektion festgelegt.\n\nIn den Einstellungen der Seite kannst Du das zu verwendende Video dann auf dem Tab \"Dateien\" festlegen. Bei der Auswahl des Videos werden nur Dateien anzeigt, die beim Upload durch Auswahl einer Projektion als 360°-Videos markiert wurden. Solltest Du beim Upload vergessen haben, eine Projektion festzulegen, kannst Du dies jederzeit in den Einstellungen der Datei nachholen. Klicke dazu im Hauptmenü auf \"Dateien verwalten\", suche das 360°-Video in der Liste heraus und klicke auf den Button mit dem Zahnrad-Symbol.\n\nDer initiale Blickwinkel kann ebenfalls auf dem Tab \"Dateien\" in den Einstellungen der Seite gewählt werden. Über die \"Autoplay\" Option steuerst Du, ob das Video direkt beim Erreichen der Seite starten soll oder erst wenn der User den Play-Button aktiviert. Beachte, dass ein automatisches Abspielen auf mobilen Geräten z.T. aus technischen Gründen nicht möglich ist.\n\nFolgende Browser unterstützen die Wiedergabe von 360°-Videos:\n\n* Aktuelle Versionen von Chrome und Firefox auf OSX, Linux und Windows.\n* Aktuelle Versionen von Safari auf OSX.\n* Aktuelle Versionen von Chrome auf Android.\n* Aktuelle Versionen von Internet Explorer 11 und Edge auf Windows.\n\nFür nicht unterstützte Plattformen kannst Du einen Link zu einem YouTube-Video hinterlegen. Auf iOS-Geräten kann das 360°-Video dann in der YouTube-App angesehen werden. Alle Optionen zur Darstellung der Seite, die angezeigt wird, falls keine 360°-Videos unterstützt werden, findest Du auf dem Tab \"Fallback\". Es kann auch ein Text festgelegt werden, um dem Benutzer zu erklären, dass sein Browser das Video nicht anzeigen kann.\n\nÜber die Option \"Fallback Vorschau ansehen\" kannst Du vorübergehend eine Vorschau der Seite ansehen, wie sie Benutzer mit nicht unterstützen Browsern angezeigt wird. "
+      page_attributes:
+        autoplay:
+          inline_help: Video im Hintergrund starten soblad die Seite erreicht wird. Auf mobilen Geräten ist dies aus technischen Gründen nicht möglich. Das Video startet, wenn der Benutzer auf den Play-Button klickt.
+          label: Autoplay
+        fallback_background_image_id:
+          inline_help: Bild, das angezeigt wird, wenn der Browser keine 360°-Videos unterstützt.
+          label: Fallback Bild
+        fallback_background_type:
+          inline_help: Left fest, ob ein Bild oder ein Video angezeigt wird, wenn der Browser keine 360°-Videos unterstützt.
+          label: Fallback Typ
+          values:
+            image: Hintergrund-Bild
+            video: Hintergrund-Video
+        fallback_poster_image_id:
+          inline_help: Poster für Video, das angezeigt wird, wenn der Browser keine 360°-Videos unterstützt.
+          label: Fallback Video Poster
+        fallback_text:
+          inline_help: Text, der angezeigt wird, um zu erklären, dass der Browser keine 360°-Videos unterstützt. Leer lassen, um Standard-Text zu verwenden.
+          label: Fallback Erklärtext
+        fallback_video_file_id:
+          inline_help: Video, das angezeigt wird, wenn der Browser keine 360°-Videos unterstützt.
+          label: Fallback Video
+        fallback_you_tube_url:
+          inline_help: YouTube Video, das verlinkt wird, wenn der Browser keine 360°-Videos unterstützt.
+          label: Fallback YouTube URL
+        is_stereo:
+          inline_help: Gibt an, ob das Video im "Stacked Stereo" Format ist.
+          label: Stereo
+        poster_id:
+          inline_help: Wird angezeigt während das 360°-Video lädt. Wenn kein Poster ausgewählt ist, wird das erste Frame des Videos verwendet. Auf das Posterbild wird die gleiche Projektion angewendet, wie auf das Video.
+          label: 360°-Posterbild
+        preview_vr_fallback:
+          inline_help: Aktivieren Sie diese Option, um die Seite so zu sehen, wie sie angezeigt wird, wenn der Browser keine 360°-Videos unterstützt.
+          label: Fallback Vorschau ansehen
+        start_yaw:
+          inline_help: Bestimmt den initialen Blickwinkel im Video.
+          label: Start-Winkel
+        video_id:
+          inline_help: Video in dem der Benutzer sich umsehen kann.
+          label: 360°-Video
+      page_type_category_name: Interaktiv
+      page_type_description: Interaktive 360° Videos
+      page_type_feature_name: 360° Video Seitentyp
+      page_type_name: 360° Video
