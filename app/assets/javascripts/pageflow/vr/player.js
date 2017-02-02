@@ -64,6 +64,10 @@ pageflow.vr.Player = pageflow.Object.extend({
 
       this.trigger(message.event, message.eventData);
     }
+  },
+
+  one: function() {
+    this.once.apply(this, arguments);
   }
 });
 
