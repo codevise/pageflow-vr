@@ -39,22 +39,6 @@ de:
             with_projection:
               blank_slate: Gebe in den Datei-Einstellungen eines Videos eine Projektion an, um es als 360° Video zu markieren.
               name: 360° Videos
-    public:
-      vr:
-        no_vr:
-          link: Video in der YouTube-App ansehen
-          text: 360°-Videos können in ihrem Browser nicht angezeigt werden.
-        select_quality: Video-Qualität auswählen
-        start: 360° Video ansehen
-        start_cardboard: Cardboard-Modus starten
-        video_qualities:
-          4k: 2160s
-          fullhd: 1080s
-          high: 720s
-        video_quality_annotations:
-          4k: 4K
-          fullhd: HD
-          high: HD
     ui:
       configuration_editor:
         tabs:

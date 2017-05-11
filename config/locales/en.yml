@@ -39,22 +39,6 @@ en:
             with_projection:
               blank_slate: Choose a projection in the file settings, to mark it as a 360° video.
               name: 360° videos
-    public:
-      vr:
-        no_vr:
-          link: Show video in Youtube app.
-          text: 360° videos can't be displayed in your browser.
-        select_quality: Choose video quality
-        start: Watch 360° video
-        start_cardboard: Start cardboard mode
-        video_qualities:
-          4k: 2160s
-          fullhd: 1080s
-          high: 720s
-        video_quality_annotations:
-          4k: 4K
-          fullhd: HD
-          high: HD
     ui:
       configuration_editor:
         tabs:
