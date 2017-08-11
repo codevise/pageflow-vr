@@ -29,7 +29,7 @@ Include javascripts and stylesheets:
     # app/assets/javascripts/pageflow/editor.js
     //= require pageflow/vr/editor
 
-    # app/assets/stylesheets/pageflow/themes/default.css.scss
+    # app/assets/stylesheets/pageflow/themes/default.scss
     @import "pageflow/vr/themes/default";
 
 Install the routes:
