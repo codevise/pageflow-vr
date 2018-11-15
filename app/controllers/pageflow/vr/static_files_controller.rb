@@ -3,6 +3,13 @@ module Pageflow
     class StaticFilesController < ActionController::Base
       after_action :allow_iframe, only: :vrview
 
+      # By default Rails only allows XHR requests with js content type
+      # (see docs of
+      # `ActionController::RequestForgeryProtection`). This controller
+      # serves static assets, though. Allow using its endpoint in
+      # `<script>` tags.
+      protect_from_forgery except: :vrview
+
       def vrview
         respond_to do |format|
           format.html
