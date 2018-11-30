@@ -3,7 +3,8 @@ module Pageflow
     class ProjectionAutoDetection
       def call(options)
         file = options[:file]
-        return unless file.is_a?(VideoFile)
+        return unless file.is_a?(VideoFile) && file.usages.any?
+
         usage = file.usages.first
 
         if dimension_present?(file) && auto_detection_enabled?(usage)
