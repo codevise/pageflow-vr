@@ -5,6 +5,7 @@
 /coverage/
 /doc/
 /pkg/
+/spec/dummy/
 /spec/reports/
 /tmp/
 /.localeapp
