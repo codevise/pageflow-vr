@@ -10706,6 +10706,7 @@ IFrameMessageReceiver.prototype.onMessage_ = function(event) {
   var data = message.data;
 
   switch (type) {
+    case Message.AUTOPAN:
     case Message.SET_CONTENT:
     case Message.SET_VOLUME:
     case Message.MUTED:
@@ -10816,6 +10817,7 @@ var WebVRPolyfill = _dereq_('webvr-polyfill');
 var WorldRenderer = _dereq_('./world-renderer');
 
 var receiver = new IFrameMessageReceiver();
+receiver.on(Message.AUTOPAN, onAutopanRequest);
 receiver.on(Message.PLAY, onPlayRequest);
 receiver.on(Message.PAUSE, onPauseRequest);
 receiver.on(Message.ADD_HOTSPOT, onAddHotspot);
@@ -10920,6 +10922,10 @@ function onRenderLoad(event) {
 
     isReadySent = true;
   }
+}
+
+function onAutopanRequest() {
+  worldRenderer.autopan();
 }
 
 function onPlayRequest() {
@@ -12056,6 +12062,7 @@ module.exports = WorldRenderer;
  * Messages from the API to the embed.
  */
 var Message = {
+  AUTOPAN: 'autopan',
   PLAY: 'play',
   PAUSE: 'pause',
   TIMEUPDATE: 'timeupdate',
