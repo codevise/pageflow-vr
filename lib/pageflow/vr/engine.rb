@@ -8,6 +8,7 @@ module Pageflow
 
       initializer "pageflow-vr.add_watchable_files", group: :all do |app|
         app.config.watchable_files.concat Dir["#{config.root}/app/assets/javascripts/**/*.jsx*"]
+        app.config.assets.precompile += %w[pageflow/vr/loading.gif]
       end
     end
   end
