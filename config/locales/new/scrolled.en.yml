@@ -1,0 +1,11 @@
+en:
+  pageflow_scrolled:
+    editor:
+      content_elements:
+        vrImage:
+          name: 360° Image
+          tabs:
+            general: 360° Image
+          attributes:
+            image:
+              label: Image
