@@ -11,7 +11,7 @@ import {
 import styles from './VrView.module.css';
 
 export function VrView({configuration}) {
-  const {isPrepared} = useContentElementLifecycle({
+  const {shouldLoad} = useContentElementLifecycle({
     onActivate() {
       if (frameRef.current) {
         frameRef.current.contentWindow.postMessage({type: 'autopan'},
@@ -30,17 +30,17 @@ export function VrView({configuration}) {
         <ViewportDependentPillarBoxes aspectRatio={configuration.position === 'full' ? 0.5 : 0.75}
                                       position={configuration.position}
                                       opaque={!!configuration.caption}>
-          {renderIframeIfPrepared(configuration, imageFile, isPrepared, frameRef)}
+          {renderLazyIframe(configuration, imageFile, shouldLoad, frameRef)}
         </ViewportDependentPillarBoxes>
       </Figure>
     </div>
   );
 }
 
-function renderIframeIfPrepared(configuration, imageFile, isPrepared, frameRef) {
+function renderLazyIframe(configuration, imageFile, shouldLoad, frameRef) {
   const source = getSource(imageFile, configuration)
 
-  if (isPrepared && source) {
+  if (shouldLoad && source) {
     return renderIframe(source, frameRef);
   }
 }
