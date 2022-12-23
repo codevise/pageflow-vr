@@ -1,7 +1,7 @@
 # Pageflow VR
 
 [![Gem Version](https://badge.fury.io/rb/pageflow-vr.svg)](http://badge.fury.io/rb/pageflow-vr)
-[![Build Status](https://travis-ci.org/codevise/pageflow-vr.svg?branch=master)](https://travis-ci.org/codevise/pageflow-vr)
+[![Build Status](https://github.com/codevise/pageflow-vr/workflows/tests/badge.svg)](https://github.com/codevise/pageflow-vr/actions)
 
 Page type to display 360° videos.
 
