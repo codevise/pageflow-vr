@@ -1,4 +1,5 @@
 require 'pageflow/vr/engine'
+require 'pageflow/vr/version'
 
 module Pageflow
   module Vr
