@@ -17,18 +17,13 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 2.1'
 
-  spec.add_dependency 'pageflow', ['>= 12.0', '< 17']
+  spec.add_dependency 'pageflow', ['>= 12.0', '< 18']
   spec.add_dependency 'pageflow-public-i18n', '~> 1.10'
 
   spec.add_development_dependency 'bundler', ['>= 1.12', '< 3']
-  spec.add_development_dependency 'pageflow-support', ['>= 14', '< 17']
+  spec.add_development_dependency 'pageflow-support', ['>= 14', '< 18']
   spec.add_development_dependency 'rake', '~> 12.0'
-
-  if ENV['PAGEFLOW_DEPENDENCIES'] == 'experimental'
-    spec.add_development_dependency 'rspec-rails', '~> 6.0'
-  else
-    spec.add_development_dependency 'rspec-rails', '~> 3.0'
-  end
+  spec.add_development_dependency 'rspec-rails', '~> 6.0'
 
   spec.add_development_dependency 'semmy', '~> 1.0'
 end
