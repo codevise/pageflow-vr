@@ -8,9 +8,4 @@ if ENV['PAGEFLOW_DEPENDENCIES'] == 'experimental'
     gem 'pageflow'
     gem 'pageflow-support'
   end
-else
-  group :development, :test do
-    # Help Bundler resolve dependencies
-    gem 'rails', '~> 5.2.0'
-  end
 end
